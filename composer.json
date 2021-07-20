@@ -1,0 +1,63 @@
+{
+    "name": "dbp/api-keycloak-bundle",
+    "type": "symfony-bundle",
+    "license": "AGPL-3.0-or-later",
+    "require": {
+        "php": "^7.3",
+        "symfony/yaml": "^5.2",
+        "symfony/framework-bundle": "^5.2",
+        "web-token/jwt-easy": "^2.1",
+        "web-token/jwt-signature-algorithm-rsa": "^2.1",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpstan/phpstan": "^0.12.33",
+        "phpstan/phpstan-phpunit": "^0.12.13",
+        "symfony/phpunit-bridge": "^5.2",
+        "vimeo/psalm": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "DBP\\API\\KeycloakBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "DBP\\API\\KeycloakBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+          "php": "7.3"
+        }
+    },
+    "scripts": {
+        "test": [
+            "@php vendor/bin/simple-phpunit"
+        ],
+        "phpstan": [
+            "@php vendor/bin/simple-phpunit --atleast-version 0",
+            "@php vendor/bin/phpstan analyze --ansi"
+        ],
+        "psalm": [
+            "@php vendor/bin/simple-phpunit --atleast-version 0",
+            "@php vendor/bin/psalm"
+        ],
+        "lint": [
+            "@composer run cs",
+            "@composer run phpstan",
+            "@composer run psalm"
+        ],
+        "cs-fix": [
+            "@php vendor/bin/php-cs-fixer --ansi fix"
+        ],
+        "cs": [
+            "@php vendor/bin/php-cs-fixer --ansi fix --dry-run --diff"
+        ],
+        "coverage": [
+            "@php -dxdebug.mode=coverage vendor/bin/simple-phpunit --coverage-html _coverage"
+        ]
+    }
+}
