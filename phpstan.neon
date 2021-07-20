@@ -12,3 +12,5 @@ parameters:
     excludes_analyse:
         - tests/bootstrap.php
     ignoreErrors:
+        - message: '#.*NodeDefinition::children.*#'
+          path: ./src/DependencyInjection
