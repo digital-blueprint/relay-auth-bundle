@@ -14,12 +14,13 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('dbp_keycloak');
         $treeBuilder->getRootNode()
             ->children()
-            ->scalarNode('server_url')->end()
-            ->scalarNode('realm')->end()
-            ->scalarNode('client_id')->end()
-            ->scalarNode('client_secret')->end()
-            ->scalarNode('audience')->end()
-            ->booleanNode('local_validation')->defaultTrue()->end()
+                ->scalarNode('server_url')->end()
+                ->scalarNode('realm')->end()
+                ->scalarNode('client_id')->end()
+                ->scalarNode('client_secret')->end()
+                ->scalarNode('audience')->end()
+                ->booleanNode('local_validation')->defaultTrue()->end()
+                ->scalarNode('frontend_client_id')->end()
             ->end();
 
         return $treeBuilder;
