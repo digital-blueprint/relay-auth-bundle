@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DBP\API\KeycloakBundle\Tests\Keycloak;
 
-use DBP\API\CoreBundle\Keycloak\Keycloak;
+use DBP\API\KeycloakBundle\Keycloak\Keycloak;
 use PHPUnit\Framework\TestCase;
 
 class KeycloakTest extends TestCase

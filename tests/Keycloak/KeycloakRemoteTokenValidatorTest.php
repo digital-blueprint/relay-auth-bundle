@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DBP\API\KeycloakBundle\Tests\Keycloak;
 
-use DBP\API\CoreBundle\Keycloak\Keycloak;
-use DBP\API\CoreBundle\Keycloak\KeycloakRemoteTokenValidator;
-use DBP\API\CoreBundle\Keycloak\TokenValidationException;
+use DBP\API\KeycloakBundle\Keycloak\Keycloak;
+use DBP\API\KeycloakBundle\Keycloak\KeycloakRemoteTokenValidator;
+use DBP\API\KeycloakBundle\Keycloak\TokenValidationException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
