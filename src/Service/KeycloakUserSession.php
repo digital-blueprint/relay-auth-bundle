@@ -106,6 +106,10 @@ class KeycloakUserSession implements UserSessionInterface
     {
         assert($this->jwt !== null);
 
+        if (!isset($this->jwt['exp']) || !isset($this->jwt['iat'])) {
+            return -1;
+        }
+
         return max($this->jwt['exp'] - $this->jwt['iat'], 0);
     }
 }
