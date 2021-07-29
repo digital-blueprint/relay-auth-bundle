@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DBP\API\KeycloakBundle\Keycloak;
+namespace Dbp\Relay\KeycloakBundle\Keycloak;
 
-use DBP\API\KeycloakBundle\Helpers\Tools;
+use Dbp\Relay\KeycloakBundle\Helpers\Tools;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Jose\Component\Core\JWKSet;

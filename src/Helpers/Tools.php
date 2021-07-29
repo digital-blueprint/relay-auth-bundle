@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DBP\API\KeycloakBundle\Helpers;
+namespace Dbp\Relay\KeycloakBundle\Helpers;
 
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;

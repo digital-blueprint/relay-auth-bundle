@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DBP\API\KeycloakBundle\Keycloak;
+namespace Dbp\Relay\KeycloakBundle\Keycloak;
 
 class Keycloak
 {

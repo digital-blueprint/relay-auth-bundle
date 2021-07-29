@@ -1,5 +1,5 @@
 {
-    "name": "dbp/api-keycloak-bundle",
+    "name": "dbp/relay-keycloak-bundle",
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
     "require": {
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "DBP\\API\\KeycloakBundle\\": "src/"
+            "Dbp\\Relay\\KeycloakBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-          "DBP\\API\\KeycloakBundle\\Tests\\": "tests/"
+            "Dbp\\Relay\\KeycloakBundle\\Tests\\": "tests/"
         }
     },
     "config": {

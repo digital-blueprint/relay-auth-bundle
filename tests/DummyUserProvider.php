@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DBP\API\KeycloakBundle\Tests;
+namespace Dbp\Relay\KeycloakBundle\Tests;
 
-use DBP\API\KeycloakBundle\Keycloak\KeycloakBearerUserProviderInterface;
+use Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 

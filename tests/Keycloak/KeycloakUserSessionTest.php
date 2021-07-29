@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DBP\API\KeycloakBundle\Tests\Keycloak;
+namespace Dbp\Relay\KeycloakBundle\Tests\Keycloak;
 
-use DBP\API\KeycloakBundle\Service\KeycloakUserSession;
+use Dbp\Relay\KeycloakBundle\Service\KeycloakUserSession;
 use PHPUnit\Framework\TestCase;
 
 class KeycloakUserSessionTest extends TestCase

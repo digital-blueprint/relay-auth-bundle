@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DBP\API\KeycloakBundle\Tests\Keycloak;
+namespace Dbp\Relay\KeycloakBundle\Tests\Keycloak;
 
-use DBP\API\KeycloakBundle\Keycloak\Keycloak;
+use Dbp\Relay\KeycloakBundle\Keycloak\Keycloak;
 use PHPUnit\Framework\TestCase;
 
 class KeycloakTest extends TestCase
