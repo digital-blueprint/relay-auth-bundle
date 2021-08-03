@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\KeycloakBundle\Keycloak;
 
-use DBP\API\CoreBundle\API\UserSessionInterface;
+use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;

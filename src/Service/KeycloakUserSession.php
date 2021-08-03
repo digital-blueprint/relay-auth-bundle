@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\KeycloakBundle\Service;
 
-use DBP\API\CoreBundle\API\UserSessionInterface;
+use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 
 class KeycloakUserSession implements UserSessionInterface
 {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7e6713329ec27dd25b421f4832dc049",
+    "content-hash": "50170977c47a08a33e590df35e57052f",
     "packages": [
         {
             "name": "api-platform/core",
@@ -222,56 +222,52 @@
             "time": "2021-01-20T22:51:39+00:00"
         },
         {
-            "name": "dbp/api-core-bundle",
-            "version": "v0.1.8",
+            "name": "dbp/relay-core-bundle",
+            "version": "v0.1.10",
             "source": {
                 "type": "git",
-                "url": "https://gitlab.tugraz.at/dbp/dbp-api/api-core-bundle",
-                "reference": "d80dc0293652bce9a830403a26e5c0cda8d2a10e"
+                "url": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle",
+                "reference": "91803576ac4df894dd35306bb8eaad8b1afa01e7"
             },
             "require": {
                 "api-platform/core": "^2.6.3",
                 "doctrine/annotations": "^1.0",
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^7.0",
-                "kevinrob/guzzle-cache-middleware": "^3.3",
-                "monolog/monolog": "^1.4||^2.1",
                 "nelmio/cors-bundle": "^2.1.0",
                 "php": "^7.3",
                 "phpdocumentor/reflection-docblock": "^3.0 || ^4.0 || ^5.0",
-                "symfony/asset": "^5.2",
-                "symfony/config": "^5.2",
-                "symfony/expression-language": "^5.2",
-                "symfony/framework-bundle": "^5.2",
-                "symfony/security-bundle": "^5.2",
-                "symfony/security-core": "^5.2",
-                "symfony/security-guard": "^5.2",
-                "symfony/twig-bundle": "^5.2",
-                "symfony/validator": "^5.2",
-                "symfony/yaml": "^5.2",
-                "web-token/jwt-easy": "^2.1",
-                "web-token/jwt-signature-algorithm-rsa": "^2.1"
+                "symfony/asset": "^5.3",
+                "symfony/config": "^5.3",
+                "symfony/expression-language": "^5.3",
+                "symfony/framework-bundle": "^5.3",
+                "symfony/security-bundle": "^5.3",
+                "symfony/security-core": "^5.3",
+                "symfony/security-guard": "^5.3",
+                "symfony/twig-bundle": "^5.3",
+                "symfony/validator": "^5.3",
+                "symfony/yaml": "^5.3"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "phpstan/phpstan": "^0.12.33",
                 "phpstan/phpstan-phpunit": "^0.12.13",
-                "symfony/browser-kit": "^5.2",
-                "symfony/http-client": "^5.2",
-                "symfony/phpunit-bridge": "^5.2",
+                "symfony/browser-kit": "^5.3",
+                "symfony/http-client": "^5.3",
+                "symfony/phpunit-bridge": "^5.3",
                 "vimeo/psalm": "^4.4"
             },
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "DBP\\API\\CoreBundle\\": "src/"
+                    "Dbp\\Relay\\CoreBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "AGPL-3.0-or-later"
             ],
-            "time": "2021-07-29T10:18:16+00:00"
+            "time": "2021-08-03T09:10:52+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -971,102 +967,6 @@
                 "source": "https://github.com/Kevinrob/guzzle-cache-middleware/tree/v3.4.1"
             },
             "time": "2021-07-11T09:00:28+00:00"
-        },
-        {
-            "name": "monolog/monolog",
-            "version": "2.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "71312564759a7db5b789296369c1a264efc43aad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/71312564759a7db5b789296369c1a264efc43aad",
-                "reference": "71312564759a7db5b789296369c1a264efc43aad",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "psr/log": "^1.0.1"
-            },
-            "provide": {
-                "psr/log-implementation": "1.0.0"
-            },
-            "require-dev": {
-                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
-                "doctrine/couchdb": "~1.0@dev",
-                "elasticsearch/elasticsearch": "^7",
-                "graylog2/gelf-php": "^1.4.2",
-                "mongodb/mongodb": "^1.8",
-                "php-amqplib/php-amqplib": "~2.4",
-                "php-console/php-console": "^3.1.3",
-                "phpspec/prophecy": "^1.6.1",
-                "phpstan/phpstan": "^0.12.91",
-                "phpunit/phpunit": "^8.5",
-                "predis/predis": "^1.1",
-                "rollbar/rollbar": "^1.3",
-                "ruflin/elastica": ">=0.90 <7.0.1",
-                "swiftmailer/swiftmailer": "^5.3|^6.0"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
-                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
-                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
-                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mbstring": "Allow to work properly with unicode symbols",
-                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
-                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
-                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
-                "php-console/php-console": "Allow sending log messages to Google Chrome",
-                "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Monolog\\": "src/Monolog"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "https://seld.be"
-                }
-            ],
-            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
-            "homepage": "https://github.com/Seldaek/monolog",
-            "keywords": [
-                "log",
-                "logging",
-                "psr-3"
-            ],
-            "support": {
-                "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.3.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/Seldaek",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-07-23T07:42:52+00:00"
         },
         {
             "name": "nelmio/cors-bundle",

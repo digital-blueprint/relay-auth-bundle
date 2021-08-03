@@ -14,7 +14,7 @@ services:
   Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProviderInterface:
     '@Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProvider'
 
-  DBP\API\CoreBundle\API\UserSessionInterface:
+  Dbp\Relay\CoreBundle\API\UserSessionInterface:
     '@Dbp\Relay\KeycloakBundle\Service\KeycloakUserSession'
 
   Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface:

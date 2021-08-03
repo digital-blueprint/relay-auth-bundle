@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Dbp\Relay\KeycloakBundle\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle;
-use DBP\API\CoreBundle\DbpCoreBundle;
+use Dbp\Relay\CoreBundle\DbpRelayCoreBundle;
 use Dbp\Relay\KeycloakBundle\DbpRelayKeycloakBundle;
 use Nelmio\CorsBundle\NelmioCorsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -29,12 +29,12 @@ class Kernel extends BaseKernel
         yield new NelmioCorsBundle();
         yield new ApiPlatformBundle();
         yield new DbpRelayKeycloakBundle();
-        yield new DbpCoreBundle();
+        yield new DbpRelayCoreBundle();
     }
 
     protected function configureRoutes(RoutingConfigurator $routes)
     {
-        $routes->import('@DbpCoreBundle/Resources/config/routing.yaml');
+        $routes->import('@DbpRelayCoreBundle/Resources/config/routing.yaml');
     }
 
     protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)

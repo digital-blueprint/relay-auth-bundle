@@ -5,7 +5,7 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
-        "dbp/api-core-bundle": "^0.1.6",
+        "dbp/relay-core-bundle": "^0.1.10",
         "guzzlehttp/guzzle": "^7.0",
         "kevinrob/guzzle-cache-middleware": "^3.3",
         "symfony/framework-bundle": "^5.2",
