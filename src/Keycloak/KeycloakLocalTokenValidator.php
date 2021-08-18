@@ -20,17 +20,16 @@ class KeycloakLocalTokenValidator extends KeycloakTokenValidatorBase
     private $keycloak;
     private $cachePool;
     private $clientHandler;
+    private $leewaySeconds;
 
     /* The duration the public keycloak cert is cached */
     private const CERT_CACHE_TTL_SECONDS = 3600;
 
-    /* The leeway given for time based checks for token validation, in case the clocks of the server are out of sync */
-    private const LOCAL_LEEWAY_SECONDS = 120;
-
-    public function __construct(Keycloak $keycloak, ?CacheItemPoolInterface $cachePool)
+    public function __construct(Keycloak $keycloak, ?CacheItemPoolInterface $cachePool, int $leewaySeconds)
     {
         $this->keycloak = $keycloak;
         $this->cachePool = $cachePool;
+        $this->leewaySeconds = $leewaySeconds;
         $this->clientHandler = null;
     }
 
@@ -116,9 +115,9 @@ class KeycloakLocalTokenValidator extends KeycloakTokenValidatorBase
             $validate = $validate
                 ->algs(['RS256', 'RS512'])
                 ->keyset($keySet)
-                ->exp(self::LOCAL_LEEWAY_SECONDS)
-                ->iat(self::LOCAL_LEEWAY_SECONDS)
-                ->nbf(self::LOCAL_LEEWAY_SECONDS)
+                ->exp($this->leewaySeconds)
+                ->iat($this->leewaySeconds)
+                ->nbf($this->leewaySeconds)
                 ->iss($issuer);
             assert($validate instanceof Validate);
             $jwtResult = $validate->run();

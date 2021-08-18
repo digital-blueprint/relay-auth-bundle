@@ -40,10 +40,11 @@ class KeycloakBearerUserProvider implements KeycloakBearerUserProviderInterface,
         $config = $this->config;
         $keycloak = new Keycloak(
             $config['server_url'], $config['realm'],
-            $config['client_id'], $config['client_secret']);
+            $config['remote_validation_client_id'], $config['remote_validation_client_secret']);
 
-        if ($config['local_validation']) {
-            $validator = new KeycloakLocalTokenValidator($keycloak, $this->certCachePool);
+        if (!$config['remote_validation']) {
+            $leeway = $config['local_validation_leeway'];
+            $validator = new KeycloakLocalTokenValidator($keycloak, $this->certCachePool, $leeway);
         } else {
             $validator = new KeycloakRemoteTokenValidator($keycloak);
         }
@@ -51,8 +52,8 @@ class KeycloakBearerUserProvider implements KeycloakBearerUserProviderInterface,
 
         $jwt = $validator->validate($accessToken);
 
-        if (($config['audience'] ?? '') !== '') {
-            $validator::checkAudience($jwt, $config['audience']);
+        if (($config['required_audience'] ?? '') !== '') {
+            $validator::checkAudience($jwt, $config['required_audience']);
         }
 
         return $this->loadUserByValidatedToken($jwt);

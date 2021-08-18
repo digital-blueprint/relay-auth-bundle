@@ -30,7 +30,7 @@ class KeycloakLocalTokenValidatorTest extends TestCase
         $this->keycloak = $keycloak;
         $cache = new ArrayAdapter();
 
-        $this->tokenValidator = new KeycloakLocalTokenValidator($keycloak, $cache);
+        $this->tokenValidator = new KeycloakLocalTokenValidator($keycloak, $cache, 0);
         $this->mockResponses([]);
     }
 
