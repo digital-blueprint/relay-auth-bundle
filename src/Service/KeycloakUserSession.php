@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dbp\Relay\KeycloakBundle\Service;
 
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class KeycloakUserSession implements UserSessionInterface
 {
@@ -13,9 +14,15 @@ class KeycloakUserSession implements UserSessionInterface
      */
     private $jwt;
 
-    public function __construct()
+    /**
+     * @var ParameterBagInterface
+     */
+    private $parameters;
+
+    public function __construct(ParameterBagInterface $parameters)
     {
         $this->jwt = null;
+        $this->parameters = $parameters;
     }
 
     public function getUserIdentifier(): ?string
@@ -88,8 +95,8 @@ class KeycloakUserSession implements UserSessionInterface
         if (!isset($jwt['session_state'])) {
             $user = $unknown;
         } else {
-            // TODO: If we'd have an app secret we could hash that in too
-            $user = substr(hash('sha256', $client.$jwt['session_state']), 0, 6);
+            $appSecret = $this->parameters->has('kernel.secret') ? $this->parameters->get('kernel.secret') : '';
+            $user = substr(hash('sha256', $client.$jwt['session_state'].$appSecret), 0, 6);
         }
 
         return $client.'-'.$user;

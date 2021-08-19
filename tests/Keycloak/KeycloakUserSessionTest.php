@@ -6,6 +6,7 @@ namespace Dbp\Relay\KeycloakBundle\Tests\Keycloak;
 
 use Dbp\Relay\KeycloakBundle\Service\KeycloakUserSession;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
 class KeycloakUserSessionTest extends TestCase
 {
@@ -20,7 +21,8 @@ class KeycloakUserSessionTest extends TestCase
 
     public function testGetLoggingId()
     {
-        $session = new KeycloakUserSession();
+        $session = new KeycloakUserSession(new ParameterBag());
+
         $session->setSessionToken([]);
         $this->assertSame('unknown-unknown', $session->getSessionLoggingId());
         $session->setSessionToken(['azp' => 'clientA', 'session_state' => 'state']);
@@ -29,7 +31,7 @@ class KeycloakUserSessionTest extends TestCase
 
     public function testGetUserRoles()
     {
-        $session = new KeycloakUserSession();
+        $session = new KeycloakUserSession(new ParameterBag());
         $session->setSessionToken([]);
         $this->assertSame([], $session->getUserRoles());
         $session->setSessionToken(['scope' => 'foo bar quux-buz a_b']);
@@ -40,7 +42,7 @@ class KeycloakUserSessionTest extends TestCase
 
     public function testGetSessionCacheKey()
     {
-        $session = new KeycloakUserSession();
+        $session = new KeycloakUserSession(new ParameterBag());
         $session->setSessionToken(['scope' => 'foo']);
         $old = $session->getSessionCacheKey();
         $session->setSessionToken(['scope' => 'bar']);
@@ -50,7 +52,7 @@ class KeycloakUserSessionTest extends TestCase
 
     public function testGetSessionTTL()
     {
-        $session = new KeycloakUserSession();
+        $session = new KeycloakUserSession(new ParameterBag());
         $session->setSessionToken([]);
         $this->assertSame(-1, $session->getSessionTTL());
 
