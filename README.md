@@ -1,6 +1,6 @@
-# DBP API-Keycloak-Bundle
+# DBP Relay Keycloak Bundle
 
-[GitLab](https://packagist.org/packages/dbp/api-keycloak-bundle) | [Packagist](https://packagist.org/packages/dbp/api-keycloak-bundle)
+[GitLab](https://gitlab.tugraz.at/dbp/relay/dbp-relay-keycloak-bundle) | [Packagist](https://packagist.org/packages/dbp/relay-keycloak-bundle)
 
 ## Bundle Configuration
 
