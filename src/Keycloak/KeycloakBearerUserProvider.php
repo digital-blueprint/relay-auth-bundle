@@ -8,6 +8,7 @@ use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class KeycloakBearerUserProvider implements KeycloakBearerUserProviderInterface, LoggerAwareInterface
@@ -50,10 +51,18 @@ class KeycloakBearerUserProvider implements KeycloakBearerUserProviderInterface,
         }
         $validator->setLogger($this->logger);
 
-        $jwt = $validator->validate($accessToken);
+        try {
+            $jwt = $validator->validate($accessToken);
+        } catch (TokenValidationException $e) {
+            throw new AccessDeniedException('Invalid token');
+        }
 
         if (($config['required_audience'] ?? '') !== '') {
-            $validator::checkAudience($jwt, $config['required_audience']);
+            try {
+                $validator::checkAudience($jwt, $config['required_audience']);
+            } catch (TokenValidationException $e) {
+                throw new AccessDeniedException('Invalid token audience');
+            }
         }
 
         return $this->loadUserByValidatedToken($jwt);
