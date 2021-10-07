@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
 
-use Dbp\Relay\KeycloakBundle\Service\KeycloakUserSession;
+use Dbp\Relay\AuthBundle\Service\KeycloakUserSession;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 

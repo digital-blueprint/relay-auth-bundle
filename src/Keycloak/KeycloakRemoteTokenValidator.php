@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Keycloak;
+namespace Dbp\Relay\AuthBundle\Keycloak;
 
-use Dbp\Relay\KeycloakBundle\Helpers\Tools;
+use Dbp\Relay\AuthBundle\Helpers\Tools;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 

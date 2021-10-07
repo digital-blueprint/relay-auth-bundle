@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Keycloak;
+namespace Dbp\Relay\AuthBundle\Keycloak;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
 
-use Dbp\Relay\KeycloakBundle\Keycloak\Keycloak;
+use Dbp\Relay\AuthBundle\Keycloak\Keycloak;
 use PHPUnit\Framework\TestCase;
 
 class KeycloakTest extends TestCase

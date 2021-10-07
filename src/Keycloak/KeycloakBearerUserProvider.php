@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Keycloak;
+namespace Dbp\Relay\AuthBundle\Keycloak;
 
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Psr\Cache\CacheItemPoolInterface;

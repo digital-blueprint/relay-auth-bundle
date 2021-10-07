@@ -1,14 +1,14 @@
-# DBP Relay Keycloak Bundle
+# DBP Relay Auth Bundle
 
-[GitLab](https://gitlab.tugraz.at/dbp/relay/dbp-relay-keycloak-bundle) | [Packagist](https://packagist.org/packages/dbp/relay-keycloak-bundle)
+[GitLab](https://gitlab.tugraz.at/dbp/relay/dbp-relay-auth-bundle) | [Packagist](https://packagist.org/packages/dbp/relay-auth-bundle)
 
 ## Bundle Configuration
 
-created via `./bin/console config:dump-reference DbpRelayKeycloakBundle | sed '/^$/d'`
+created via `./bin/console config:dump-reference DbpRelayAuthBundle | sed '/^$/d'`
 
 ```yaml
-# Default configuration for "DbpRelayKeycloakBundle"
-dbp_relay_keycloak:
+# Default configuration for "DbpRelayAuthBundle"
+dbp_relay_auth:
     # The Keycloak server URL
     server_url:           ~ # Example: 'https://keycloak.example.com/auth'
     # The Keycloak Realm

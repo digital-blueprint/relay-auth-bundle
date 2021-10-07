@@ -4,3 +4,4 @@
 /.*.cache
 /_coverage
 /.idea
+cghooks.lock

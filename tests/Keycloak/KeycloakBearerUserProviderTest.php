@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProvider;
-use Dbp\Relay\KeycloakBundle\Tests\DummyUserSession;
+use Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUserProvider;
+use Dbp\Relay\AuthBundle\Tests\DummyUserSession;
 
 class KeycloakBearerUserProviderTest extends ApiTestCase
 {

@@ -13,7 +13,7 @@
     <server name="SHELL_VERBOSITY" value="-1"/>
     <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
     <server name="SYMFONY_PHPUNIT_VERSION" value="9"/>
-    <server name="KERNEL_CLASS" value="Dbp\Relay\KeycloakBundle\Tests\Kernel"/>
+    <server name="KERNEL_CLASS" value="Dbp\Relay\AuthBundle\Tests\Kernel"/>
   </php>
   <testsuites>
     <testsuite name="Project Test Suite">

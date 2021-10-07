@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerAuthenticator;
-use Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUser;
-use Dbp\Relay\KeycloakBundle\Tests\DummyUserProvider;
+use Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerAuthenticator;
+use Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUser;
+use Dbp\Relay\AuthBundle\Tests\DummyUserProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 

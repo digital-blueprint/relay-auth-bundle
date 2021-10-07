@@ -1,21 +1,21 @@
 services:
-  Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerAuthenticator:
+  Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerAuthenticator:
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProvider:
+  Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUserProvider:
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\KeycloakBundle\Service\KeycloakUserSession:
+  Dbp\Relay\AuthBundle\Service\KeycloakUserSession:
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProviderInterface:
-    '@Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProvider'
+  Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUserProviderInterface:
+    '@Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUserProvider'
 
   Dbp\Relay\CoreBundle\API\UserSessionInterface:
-    '@Dbp\Relay\KeycloakBundle\Service\KeycloakUserSession'
+    '@Dbp\Relay\AuthBundle\Service\KeycloakUserSession'
 
   Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface:
-    '@Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerAuthenticator'
+    '@Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerAuthenticator'

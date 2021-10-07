@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Service;
+namespace Dbp\Relay\AuthBundle\Service;
 
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Tests;
+namespace Dbp\Relay\AuthBundle\Tests;
 
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 

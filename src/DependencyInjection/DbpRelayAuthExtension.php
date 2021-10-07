@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\DependencyInjection;
+namespace Dbp\Relay\AuthBundle\DependencyInjection;
 
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
-class DbpRelayKeycloakExtension extends ConfigurableExtension implements PrependExtensionInterface
+class DbpRelayAuthExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
     public function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
@@ -25,7 +25,7 @@ class DbpRelayKeycloakExtension extends ConfigurableExtension implements Prepend
         $certCacheDef->setArguments(['core-keycloak-cert', 60, '%kernel.cache_dir%/dbp/keycloak-keycloak-cert']);
         $certCacheDef->addTag('cache.pool');
 
-        $definition = $container->getDefinition('Dbp\Relay\KeycloakBundle\Keycloak\KeycloakBearerUserProvider');
+        $definition = $container->getDefinition('Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUserProvider');
         $definition->addMethodCall('setConfig', [$mergedConfig]);
         $definition->addMethodCall('setCertCache', [$certCacheDef]);
     }

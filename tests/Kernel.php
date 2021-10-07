@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\KeycloakBundle\Tests;
+namespace Dbp\Relay\AuthBundle\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle;
+use Dbp\Relay\AuthBundle\DbpRelayAuthBundle;
 use Dbp\Relay\CoreBundle\DbpRelayCoreBundle;
-use Dbp\Relay\KeycloakBundle\DbpRelayKeycloakBundle;
 use Nelmio\CorsBundle\NelmioCorsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -28,7 +28,7 @@ class Kernel extends BaseKernel
         yield new TwigBundle();
         yield new NelmioCorsBundle();
         yield new ApiPlatformBundle();
-        yield new DbpRelayKeycloakBundle();
+        yield new DbpRelayAuthBundle();
         yield new DbpRelayCoreBundle();
     }
 
