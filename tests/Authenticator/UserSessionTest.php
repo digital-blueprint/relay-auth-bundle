@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\Authenticator;
 
-use Dbp\Relay\AuthBundle\Service\KeycloakUserSession;
+use Dbp\Relay\AuthBundle\Service\OIDCUserSession;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-class KeycloakUserSessionTest extends TestCase
+class UserSessionTest extends TestCase
 {
     public function testIsServiceAccountToken()
     {
-        $this->assertTrue(KeycloakUserSession::isServiceAccountToken(['scope' => 'foo bar']));
-        $this->assertFalse(KeycloakUserSession::isServiceAccountToken(['scope' => 'openid foo bar']));
-        $this->assertFalse(KeycloakUserSession::isServiceAccountToken(['scope' => 'openid']));
-        $this->assertFalse(KeycloakUserSession::isServiceAccountToken(['scope' => 'foo openid bar']));
-        $this->assertFalse(KeycloakUserSession::isServiceAccountToken(['scope' => 'foo bar openid']));
+        $this->assertTrue(OIDCUserSession::isServiceAccountToken(['scope' => 'foo bar']));
+        $this->assertFalse(OIDCUserSession::isServiceAccountToken(['scope' => 'openid foo bar']));
+        $this->assertFalse(OIDCUserSession::isServiceAccountToken(['scope' => 'openid']));
+        $this->assertFalse(OIDCUserSession::isServiceAccountToken(['scope' => 'foo openid bar']));
+        $this->assertFalse(OIDCUserSession::isServiceAccountToken(['scope' => 'foo bar openid']));
     }
 
     public function testGetLoggingId()
     {
-        $session = new KeycloakUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag());
 
         $session->setSessionToken([]);
         $this->assertSame('unknown-unknown', $session->getSessionLoggingId());
@@ -31,7 +31,7 @@ class KeycloakUserSessionTest extends TestCase
 
     public function testGetUserRoles()
     {
-        $session = new KeycloakUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag());
         $session->setSessionToken([]);
         $this->assertSame([], $session->getUserRoles());
         $session->setSessionToken(['scope' => 'foo bar quux-buz a_b']);
@@ -42,7 +42,7 @@ class KeycloakUserSessionTest extends TestCase
 
     public function testGetSessionCacheKey()
     {
-        $session = new KeycloakUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag());
         $session->setSessionToken(['scope' => 'foo']);
         $old = $session->getSessionCacheKey();
         $session->setSessionToken(['scope' => 'bar']);
@@ -52,7 +52,7 @@ class KeycloakUserSessionTest extends TestCase
 
     public function testGetSessionTTL()
     {
-        $session = new KeycloakUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag());
         $session->setSessionToken([]);
         $this->assertSame(-1, $session->getSessionTTL());
 

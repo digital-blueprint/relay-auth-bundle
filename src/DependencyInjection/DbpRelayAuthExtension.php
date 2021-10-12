@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\DependencyInjection;
 
+use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
+use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,22 +23,25 @@ class DbpRelayAuthExtension extends ConfigurableExtension implements PrependExte
         );
         $loader->load('services.yaml');
 
-        $certCacheDef = $container->register('dbp_api.cache.keycloak.keycloak_cert', FilesystemAdapter::class);
-        $certCacheDef->setArguments(['core-keycloak-cert', 60, '%kernel.cache_dir%/dbp/keycloak-keycloak-cert']);
-        $certCacheDef->addTag('cache.pool');
+        $cacheDef = $container->register('dbp_api.cache.auth.oid_provider', FilesystemAdapter::class);
+        $cacheDef->setArguments(['core-keycloak-cert', 60, '%kernel.cache_dir%/dbp/auth-oid-provider']);
+        $cacheDef->addTag('cache.pool');
 
-        $definition = $container->getDefinition('Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUserProvider');
+        $definition = $container->getDefinition(BearerUserProvider::class);
         $definition->addMethodCall('setConfig', [$mergedConfig]);
-        $definition->addMethodCall('setCertCache', [$certCacheDef]);
+
+        $definition = $container->getDefinition(OIDProvider::class);
+        $definition->addMethodCall('setConfig', [$mergedConfig]);
+        $definition->addMethodCall('setCache', [$cacheDef]);
     }
 
     public function prepend(ContainerBuilder $container)
     {
         $config = $container->getExtensionConfig($this->getAlias())[0];
         $this->extendArrayParameter($container, 'dbp_api.twig_globals', [
-            'keycloak_server_url' => $config['server_url'] ?? '',
-            'keycloak_realm' => $config['realm'] ?? '',
-            'keycloak_frontend_client_id' => $config['frontend_client_id'] ?? '',
+            'keycloak_server_url' => $config['frontend_keycloak_server'] ?? '',
+            'keycloak_realm' => $config['frontend_keycloak_realm'] ?? '',
+            'keycloak_frontend_client_id' => $config['frontend_keycloak_client_id'] ?? '',
         ]);
     }
 
