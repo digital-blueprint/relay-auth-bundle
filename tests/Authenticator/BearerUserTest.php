@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\Authenticator;
 
-use Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUser;
+use Dbp\Relay\AuthBundle\Authenticator\BearerUser;
 use PHPUnit\Framework\TestCase;
 
-class KeycloakBearerUserTest extends TestCase
+class BearerUserTest extends TestCase
 {
     public function testRolesWithNoRealUser()
     {
-        $user = new KeycloakBearerUser(null, ['foobar']);
+        $user = new BearerUser(null, ['foobar']);
         $this->assertSame(['foobar'], $user->getRoles());
     }
 
     public function testGetUserIdentifier()
     {
-        $user = new KeycloakBearerUser(null, ['foobar']);
+        $user = new BearerUser(null, ['foobar']);
         $this->assertSame('', $user->getUserIdentifier());
         $this->assertSame('', $user->getUsername());
-        $user = new KeycloakBearerUser('quux', ['foobar']);
+        $user = new BearerUser('quux', ['foobar']);
         $this->assertSame('quux', $user->getUserIdentifier());
         $this->assertSame('quux', $user->getUsername());
     }

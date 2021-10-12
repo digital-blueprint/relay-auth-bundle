@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Keycloak;
+namespace Dbp\Relay\AuthBundle\Authenticator;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 
-abstract class KeycloakTokenValidatorBase implements LoggerAwareInterface
+abstract class TokenValidatorBase implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 

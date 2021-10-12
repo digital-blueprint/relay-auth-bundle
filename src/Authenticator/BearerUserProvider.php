@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Keycloak;
+namespace Dbp\Relay\AuthBundle\Authenticator;
 
+use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
-use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class KeycloakBearerUserProvider implements KeycloakBearerUserProviderInterface, LoggerAwareInterface
+class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
     private $config;
-    private $certCachePool;
-    private $personCachePool;
     private $userSession;
+    private $oidProvider;
 
-    public function __construct(UserSessionInterface $userSession)
+    public function __construct(UserSessionInterface $userSession, OIDProvider $oidProvider)
     {
         $this->userSession = $userSession;
         $this->config = [];
+        $this->oidProvider = $oidProvider;
     }
 
     public function setConfig(array $config)
@@ -31,37 +31,30 @@ class KeycloakBearerUserProvider implements KeycloakBearerUserProviderInterface,
         $this->config = $config;
     }
 
-    public function setCertCache(?CacheItemPoolInterface $cachePool)
-    {
-        $this->certCachePool = $cachePool;
-    }
-
     public function loadUserByToken(string $accessToken): UserInterface
     {
         $config = $this->config;
-        $keycloak = new Keycloak(
-            $config['server_url'], $config['realm'],
-            $config['remote_validation_client_id'], $config['remote_validation_client_secret']);
-
         if (!$config['remote_validation']) {
             $leeway = $config['local_validation_leeway'];
-            $validator = new KeycloakLocalTokenValidator($keycloak, $this->certCachePool, $leeway);
+            $validator = new LocalTokenValidator($this->oidProvider, $leeway);
         } else {
-            $validator = new KeycloakRemoteTokenValidator($keycloak);
+            $validator = new RemoteTokenValidator($this->oidProvider);
         }
-        $validator->setLogger($this->logger);
+        if ($this->logger !== null) {
+            $validator->setLogger($this->logger);
+        }
 
         try {
             $jwt = $validator->validate($accessToken);
         } catch (TokenValidationException $e) {
-            throw new AccessDeniedException('Invalid token');
+            throw new AuthenticationException('Invalid token');
         }
 
         if (($config['required_audience'] ?? '') !== '') {
             try {
                 $validator::checkAudience($jwt, $config['required_audience']);
             } catch (TokenValidationException $e) {
-                throw new AccessDeniedException('Invalid token audience');
+                throw new AuthenticationException('Invalid token audience');
             }
         }
 
@@ -75,7 +68,7 @@ class KeycloakBearerUserProvider implements KeycloakBearerUserProviderInterface,
         $identifier = $session->getUserIdentifier();
         $userRoles = $session->getUserRoles();
 
-        return new KeycloakBearerUser(
+        return new BearerUser(
             $identifier,
             $userRoles
         );

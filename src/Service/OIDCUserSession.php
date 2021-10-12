@@ -7,7 +7,7 @@ namespace Dbp\Relay\AuthBundle\Service;
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class KeycloakUserSession implements UserSessionInterface
+class OIDCUserSession implements UserSessionInterface
 {
     /**
      * @var ?array

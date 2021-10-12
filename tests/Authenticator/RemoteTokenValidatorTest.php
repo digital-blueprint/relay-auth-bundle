@@ -4,24 +4,29 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
 
-use Dbp\Relay\AuthBundle\Keycloak\Keycloak;
-use Dbp\Relay\AuthBundle\Keycloak\KeycloakRemoteTokenValidator;
-use Dbp\Relay\AuthBundle\Keycloak\TokenValidationException;
+use Dbp\Relay\AuthBundle\Authenticator\RemoteTokenValidator;
+use Dbp\Relay\AuthBundle\Authenticator\TokenValidationException;
+use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
-class KeycloakRemoteTokenValidatorTest extends TestCase
+class RemoteTokenValidatorTest extends TestCase
 {
-    /* @var KeycloakRemoteTokenValidator */
+    /* @var RemoteTokenValidator */
     private $tokenValidator;
+
+    private $oid;
 
     protected function setUp(): void
     {
-        $keycloak = new Keycloak('https://auth.example.com/auth', 'tugraz', 'client', 'secret');
-
-        $this->tokenValidator = new KeycloakRemoteTokenValidator($keycloak);
+        $this->oid = new OIDProvider();
+        $this->oid->setConfig([
+            'remote_validation_id' => 'foo',
+            'remote_validation_secret' => 'bar',
+        ]);
+        $this->tokenValidator = new RemoteTokenValidator($this->oid);
         $this->mockResponses([]);
     }
 
@@ -33,7 +38,7 @@ class KeycloakRemoteTokenValidatorTest extends TestCase
     private function mockResponses(array $responses)
     {
         $stack = HandlerStack::create(new MockHandler($responses));
-        $this->tokenValidator->setClientHandler($stack);
+        $this->oid->setClientHandler($stack);
     }
 
     public function testValidateOK()
@@ -54,6 +59,12 @@ class KeycloakRemoteTokenValidatorTest extends TestCase
         ];
 
         $this->mockResponses([
+            new Response(200, ['Content-Type' => 'application/json'], json_encode([
+                'issuer' => 'https://auth.example.com/auth/realms/tugraz',
+                'jwks_uri' => 'https://nope/certs',
+                'introspection_endpoint' => 'https://nope/introspect',
+                'introspection_endpoint_auth_signing_alg_values_supported' => ['RS256'],
+            ])),
             new Response(200, ['Content-Type' => 'application/json'], json_encode($result)),
         ]);
 

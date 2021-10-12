@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Keycloak;
+namespace Dbp\Relay\AuthBundle\Authenticator;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -17,13 +17,13 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
-class KeycloakBearerAuthenticator extends AbstractAuthenticator implements LoggerAwareInterface
+class BearerAuthenticator extends AbstractAuthenticator implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
     private $userProvider;
 
-    public function __construct(KeycloakBearerUserProviderInterface $userProvider)
+    public function __construct(BearerUserProviderInterface $userProvider)
     {
         $this->userProvider = $userProvider;
     }
@@ -52,8 +52,10 @@ class KeycloakBearerAuthenticator extends AbstractAuthenticator implements Logge
 
         $token = trim(preg_replace('/^(?:\s+)?Bearer\s/', '', $auth));
 
-        return new SelfValidatingPassport(new UserBadge($token, function ($token) {
-            return $this->userProvider->loadUserByToken($token);
+        $user = $this->userProvider->loadUserByToken($token);
+
+        return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier(), function ($token) use ($user) {
+            return $user;
         }));
     }
 }

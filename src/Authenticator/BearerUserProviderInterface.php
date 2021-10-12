@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Keycloak;
+namespace Dbp\Relay\AuthBundle\Authenticator;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-interface KeycloakBearerUserProviderInterface
+interface BearerUserProviderInterface
 {
     public function loadUserByToken(string $accessToken): UserInterface;
 

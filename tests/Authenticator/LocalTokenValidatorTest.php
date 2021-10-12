@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\Authenticator;
 
-use Dbp\Relay\AuthBundle\Keycloak\Keycloak;
-use Dbp\Relay\AuthBundle\Keycloak\KeycloakLocalTokenValidator;
-use Dbp\Relay\AuthBundle\Keycloak\TokenValidationException;
+use Dbp\Relay\AuthBundle\Authenticator\LocalTokenValidator;
+use Dbp\Relay\AuthBundle\Authenticator\TokenValidationException;
+use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
@@ -14,23 +14,18 @@ use Jose\Component\Core\JWK;
 use Jose\Easy\Build;
 use Jose\Easy\JWSBuilder;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
-class KeycloakLocalTokenValidatorTest extends TestCase
+class LocalTokenValidatorTest extends TestCase
 {
-    /* @var KeycloakLocalTokenValidator */
+    /* @var LocalTokenValidator */
     private $tokenValidator;
 
-    /* @var Keycloak */
-    private $keycloak;
+    private $oid;
 
     protected function setUp(): void
     {
-        $keycloak = new Keycloak('https://auth.example.com/auth', 'tugraz');
-        $this->keycloak = $keycloak;
-        $cache = new ArrayAdapter();
-
-        $this->tokenValidator = new KeycloakLocalTokenValidator($keycloak, $cache, 0);
+        $this->oid = new OIDProvider();
+        $this->tokenValidator = new LocalTokenValidator($this->oid, 0);
         $this->mockResponses([]);
     }
 
@@ -58,6 +53,16 @@ class KeycloakLocalTokenValidatorTest extends TestCase
         return ['keys' => [$this->getJWK()->toPublic()->jsonSerialize()]];
     }
 
+    private function getDiscoverResponse()
+    {
+        return [
+            'issuer' => 'https://nope/issuer',
+            'jwks_uri' => 'https://nope/certs',
+            'introspection_endpoint' => 'https://nope/introspect',
+            'introspection_endpoint_auth_signing_alg_values_supported' => ['RS256'],
+        ];
+    }
+
     private function getJWT(array $options = [])
     {
         $jwk = $this->getJWK();
@@ -69,7 +74,7 @@ class KeycloakLocalTokenValidatorTest extends TestCase
             ->nbf($time)
             ->jti('0123456789')
             ->alg('RS256')
-            ->iss($options['issuer'] ?? $this->keycloak->getBaseUrlWithRealm())
+            ->iss($options['issuer'] ?? $this->oid->getProviderConfig()->getIssuer())
             ->aud('audience1')
             ->aud('audience2')
             ->sub('subject');
@@ -81,13 +86,15 @@ class KeycloakLocalTokenValidatorTest extends TestCase
     private function mockResponses(array $responses)
     {
         $stack = HandlerStack::create(new MockHandler($responses));
-        $this->tokenValidator->setClientHandler($stack);
+        $this->oid->setClientHandler($stack);
     }
 
     private function mockJWKResponse()
     {
         $jwks = $this->getPublicJWKs();
+        $discover = $this->getDiscoverResponse();
         $this->mockResponses([
+            new Response(200, ['Content-Type' => 'application/json'], json_encode($discover)),
             new Response(200, ['Content-Type' => 'application/json'], json_encode($jwks)),
         ]);
     }
@@ -97,21 +104,21 @@ class KeycloakLocalTokenValidatorTest extends TestCase
         $this->mockJWKResponse();
         $result = $this->tokenValidator->validate($this->getJWT());
         $this->expectExceptionMessageMatches('/Bad audience/');
-        KeycloakLocalTokenValidator::checkAudience($result, 'foo');
+        LocalTokenValidator::checkAudience($result, 'foo');
     }
 
     public function testCheckAudienceGood()
     {
         $this->mockJWKResponse();
         $result = $this->tokenValidator->validate($this->getJWT());
-        KeycloakLocalTokenValidator::checkAudience($result, 'audience2');
-        KeycloakLocalTokenValidator::checkAudience($result, 'audience1');
+        LocalTokenValidator::checkAudience($result, 'audience2');
+        LocalTokenValidator::checkAudience($result, 'audience1');
         $this->assertTrue(true);
     }
 
     public function testLocalNoResponse()
     {
-        $this->mockResponses([]);
+        $this->mockJWKResponse();
         $this->expectException(TokenValidationException::class);
         $this->tokenValidator->validate('foobar');
     }

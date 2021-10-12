@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Tests;
 
-use Dbp\Relay\AuthBundle\Keycloak\KeycloakBearerUserProviderInterface;
+use Dbp\Relay\AuthBundle\Authenticator\BearerUserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class DummyUserProvider implements KeycloakBearerUserProviderInterface
+class DummyUserProvider implements BearerUserProviderInterface
 {
     private $user;
     private $token;
