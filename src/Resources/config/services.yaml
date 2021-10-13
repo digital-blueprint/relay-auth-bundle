@@ -23,3 +23,10 @@ services:
 
   Dbp\Relay\CoreBundle\API\UserSessionInterface:
     '@Dbp\Relay\AuthBundle\Service\OIDCUserSession'
+
+  Dbp\Relay\AuthBundle\Service\DefaultUserRoles:
+    autowire: true
+    autoconfigure: true
+
+  Dbp\Relay\AuthBundle\API\UserRolesInterface:
+    '@Dbp\Relay\AuthBundle\Service\DefaultUserRoles'

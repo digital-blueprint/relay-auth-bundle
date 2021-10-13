@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Service;
 
+use Dbp\Relay\AuthBundle\API\UserRolesInterface;
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -19,10 +20,16 @@ class OIDCUserSession implements UserSessionInterface
      */
     private $parameters;
 
-    public function __construct(ParameterBagInterface $parameters)
+    /**
+     * @var UserRolesInterface
+     */
+    private $userRoles;
+
+    public function __construct(ParameterBagInterface $parameters, UserRolesInterface $userRoles)
     {
         $this->jwt = null;
         $this->parameters = $parameters;
+        $this->userRoles = $userRoles;
     }
 
     public function getUserIdentifier(): ?string
@@ -36,21 +43,18 @@ class OIDCUserSession implements UserSessionInterface
         return $this->jwt['username'] ?? null;
     }
 
+    private static function getScopes($jwt): array
+    {
+        return preg_split('/\s+/', $jwt['scope'] ?? '', -1, PREG_SPLIT_NO_EMPTY);
+    }
+
     public function getUserRoles(): array
     {
         assert($this->jwt !== null);
+        $scopes = self::getScopes($this->jwt);
+        $userIdentifier = $this->getUserIdentifier();
 
-        $scopes = [];
-        if ($this->jwt['scope'] ?? '' !== '') {
-            $scopes = explode(' ', $this->jwt['scope']);
-        }
-
-        $roles = [];
-        foreach ($scopes as $scope) {
-            $roles[] = 'ROLE_SCOPE_'.mb_strtoupper($scope);
-        }
-
-        return $roles;
+        return $this->userRoles->getRoles($userIdentifier, $scopes);
     }
 
     /**
@@ -58,13 +62,11 @@ class OIDCUserSession implements UserSessionInterface
      */
     public static function isServiceAccountToken(array $jwt): bool
     {
-        if (!array_key_exists('scope', $jwt)) {
-            throw new \RuntimeException('Token missing scope key');
-        }
-        $scope = $jwt['scope'];
+        $scopes = self::getScopes($jwt);
+
         // XXX: This is the main difference I found compared to other flows, but that's a Keycloak
         // implementation detail I guess.
-        $has_openid_scope = in_array('openid', explode(' ', $scope), true);
+        $has_openid_scope = in_array('openid', $scopes, true);
 
         return !$has_openid_scope;
     }

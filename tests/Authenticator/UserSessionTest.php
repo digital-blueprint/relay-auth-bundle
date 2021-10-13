@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Tests\Authenticator;
 
+use Dbp\Relay\AuthBundle\Service\DefaultUserRoles;
 use Dbp\Relay\AuthBundle\Service\OIDCUserSession;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -21,7 +22,7 @@ class UserSessionTest extends TestCase
 
     public function testGetLoggingId()
     {
-        $session = new OIDCUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag(), new DefaultUserRoles());
 
         $session->setSessionToken([]);
         $this->assertSame('unknown-unknown', $session->getSessionLoggingId());
@@ -31,7 +32,7 @@ class UserSessionTest extends TestCase
 
     public function testGetUserRoles()
     {
-        $session = new OIDCUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag(), new DefaultUserRoles());
         $session->setSessionToken([]);
         $this->assertSame([], $session->getUserRoles());
         $session->setSessionToken(['scope' => 'foo bar quux-buz a_b']);
@@ -42,7 +43,7 @@ class UserSessionTest extends TestCase
 
     public function testGetSessionCacheKey()
     {
-        $session = new OIDCUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag(), new DefaultUserRoles());
         $session->setSessionToken(['scope' => 'foo']);
         $old = $session->getSessionCacheKey();
         $session->setSessionToken(['scope' => 'bar']);
@@ -52,7 +53,7 @@ class UserSessionTest extends TestCase
 
     public function testGetSessionTTL()
     {
-        $session = new OIDCUserSession(new ParameterBag());
+        $session = new OIDCUserSession(new ParameterBag(), new DefaultUserRoles());
         $session->setSessionToken([]);
         $this->assertSame(-1, $session->getSessionTTL());
 
