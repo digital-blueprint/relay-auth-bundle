@@ -47,6 +47,7 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
         try {
             $jwt = $validator->validate($accessToken);
         } catch (TokenValidationException $e) {
+            $this->logger->info('Invalid token:', ['exception' => $e]);
             throw new AuthenticationException('Invalid token');
         }
 
@@ -54,6 +55,7 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
             try {
                 $validator::checkAudience($jwt, $config['required_audience']);
             } catch (TokenValidationException $e) {
+                $this->logger->info('Invalid audience:', ['exception' => $e]);
                 throw new AuthenticationException('Invalid token audience');
             }
         }
