@@ -5,6 +5,8 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
+        "ext-gmp": "*",
+        "ext-curl": "*",
         "dbp/relay-core-bundle": "^0.1.10",
         "guzzlehttp/guzzle": "^7.0",
         "kevinrob/guzzle-cache-middleware": "^3.3",
