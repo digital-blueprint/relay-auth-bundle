@@ -8,6 +8,7 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use Dbp\Relay\AuthBundle\Tests\DummyUserSession;
+use Psr\Log\NullLogger;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class BearerUserProviderTest extends ApiTestCase
@@ -37,6 +38,7 @@ class BearerUserProviderTest extends ApiTestCase
         $oid = new OIDProvider();
         $udprov = new DummyUserSession('foo', ['role']);
         $prov = new BearerUserProvider($udprov, $oid);
+        $prov->setLogger(new NullLogger());
         $prov->setConfig([
             'remote_validation' => false,
             'local_validation_leeway' => 0,
