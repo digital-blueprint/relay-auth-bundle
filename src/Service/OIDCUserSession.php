@@ -34,9 +34,7 @@ class OIDCUserSession implements UserSessionInterface
 
     public function getUserIdentifier(): ?string
     {
-        assert($this->jwt !== null);
-
-        if (self::isServiceAccountToken($this->jwt)) {
+        if ($this->jwt === null || self::isServiceAccountToken($this->jwt)) {
             return null;
         }
 
