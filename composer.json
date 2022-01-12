@@ -21,6 +21,7 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^1.0.0",
         "phpstan/phpstan-phpunit": "^1.0.0",
+        "phpunit/phpunit": "^9",
         "symfony/browser-kit": "^5.3",
         "symfony/http-client": "^5.3",
         "symfony/phpunit-bridge": "^5.2",
@@ -53,14 +54,12 @@
         "post-install-cmd": "cghooks add --ignore-lock",
         "post-update-cmd": "cghooks update",
         "test": [
-            "@php vendor/bin/simple-phpunit"
+            "@php vendor/bin/phpunit"
         ],
         "phpstan": [
-            "@php vendor/bin/simple-phpunit --atleast-version 0",
             "@php vendor/bin/phpstan analyze --ansi"
         ],
         "psalm": [
-            "@php vendor/bin/simple-phpunit --atleast-version 0",
             "@php vendor/bin/psalm"
         ],
         "lint": [
