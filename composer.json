@@ -9,7 +9,7 @@
         "ext-curl": "*",
         "dbp/relay-core-bundle": "^0.1.10",
         "guzzlehttp/guzzle": "^7.0",
-        "kevinrob/guzzle-cache-middleware": "^3.3",
+        "kevinrob/guzzle-cache-middleware": "^3.3 | ^4.0",
         "symfony/framework-bundle": "^5.2",
         "symfony/security-core": "^5.2",
         "symfony/yaml": "^5.2",
