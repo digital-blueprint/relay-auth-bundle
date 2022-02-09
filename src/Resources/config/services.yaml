@@ -28,5 +28,9 @@ services:
     autowire: true
     autoconfigure: true
 
+  Dbp\Relay\AuthBundle\Service\HealthCheck:
+    autowire: true
+    autoconfigure: true
+
   Dbp\Relay\AuthBundle\API\UserRolesInterface:
     '@Dbp\Relay\AuthBundle\Service\DefaultUserRoles'
