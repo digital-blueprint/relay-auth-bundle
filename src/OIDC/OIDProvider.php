@@ -52,7 +52,7 @@ class OIDProvider implements LoggerAwareInterface
         $this->clientHandler = $handler;
     }
 
-    private function getClient(): Client
+    private function getClient(bool $noCache = false): Client
     {
         $stack = HandlerStack::create($this->clientHandler);
         if ($this->logger !== null) {
@@ -67,7 +67,7 @@ class OIDProvider implements LoggerAwareInterface
 
         $client = new Client($options);
 
-        if ($this->cachePool !== null) {
+        if ($this->cachePool !== null && !$noCache) {
             $cacheMiddleWare = new CacheMiddleware(
                 new GreedyCacheStrategy(
                     new Psr6CacheStorage($this->cachePool),
@@ -78,6 +78,17 @@ class OIDProvider implements LoggerAwareInterface
         }
 
         return $client;
+    }
+
+    public function getProviderDateTime(): \DateTimeInterface
+    {
+        $serverUrl = $this->config['server_url'] ?? '';
+        $client = $this->getClient(true);
+        $response = $client->request('GET', $serverUrl);
+        $date = new \DateTimeImmutable($response->getHeader('Date')[0]);
+        $date = $date->setTimezone(new \DateTimeZone('UTC'));
+
+        return $date;
     }
 
     /**

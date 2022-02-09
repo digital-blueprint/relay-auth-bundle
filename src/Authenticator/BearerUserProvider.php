@@ -31,6 +31,13 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
         $this->config = $config;
     }
 
+    public function getValidationLeewaySeconds(): int
+    {
+        $config = $this->config;
+
+        return $config['local_validation_leeway'];
+    }
+
     public function loadUserByToken(string $accessToken): UserInterface
     {
         $config = $this->config;

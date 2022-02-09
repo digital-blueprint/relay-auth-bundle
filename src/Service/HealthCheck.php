@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Service;
 
+use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use Dbp\Relay\CoreBundle\HealthCheck\CheckInterface;
 use Dbp\Relay\CoreBundle\HealthCheck\CheckOptions;
@@ -11,11 +12,13 @@ use Dbp\Relay\CoreBundle\HealthCheck\CheckResult;
 
 class HealthCheck implements CheckInterface
 {
-    private $provider;
+    private $oidcProvider;
+    private $userProvider;
 
-    public function __construct(OIDProvider $provider)
+    public function __construct(OIDProvider $oidcProvider, BearerUserProvider $userProvider)
     {
-        $this->provider = $provider;
+        $this->oidcProvider = $oidcProvider;
+        $this->userProvider = $userProvider;
     }
 
     public function getName(): string
@@ -40,12 +43,23 @@ class HealthCheck implements CheckInterface
 
     public function checkConfig()
     {
-        $this->provider->getProviderConfig();
+        $this->oidcProvider->getProviderConfig();
     }
 
     public function checkPublicKey()
     {
-        $this->provider->getJWKs();
+        $this->oidcProvider->getJWKs();
+    }
+
+    public function checkTimeSync()
+    {
+        $providerTime = $this->oidcProvider->getProviderDateTime();
+        $systemTime = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+        $leeway = $this->userProvider->getValidationLeewaySeconds();
+        $difference = abs($providerTime->getTimestamp() - $systemTime->getTimestamp());
+        if ($difference > $leeway) {
+            throw new \RuntimeException("The system time and the OIDC server time is out of sync ($difference > $leeway seconds)");
+        }
     }
 
     public function check(CheckOptions $options): array
@@ -53,6 +67,7 @@ class HealthCheck implements CheckInterface
         $results = [];
         $results[] = $this->checkMethod('Check if the OIDC config can be fetched', [$this, 'checkConfig']);
         $results[] = $this->checkMethod('Check if the OIDC public key can be fetched', [$this, 'checkPublicKey']);
+        $results[] = $this->checkMethod('Check if the OIDC server time is in sync', [$this, 'checkTimeSync']);
 
         return $results;
     }
