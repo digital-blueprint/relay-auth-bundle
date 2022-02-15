@@ -1,5 +1,6 @@
 {
     "name": "dbp/relay-auth-bundle",
+    "description": "Authentification bundle for the Relay API gateway",
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
     "require": {
