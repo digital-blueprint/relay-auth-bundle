@@ -6,9 +6,18 @@ namespace Dbp\Relay\AuthBundle\Authenticator;
 
 use Dbp\Relay\AuthBundle\OIDC\OIDError;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Jose\Component\Checker;
+use Jose\Component\Checker\AlgorithmChecker;
+use Jose\Component\Checker\ClaimCheckerManager;
+use Jose\Component\Checker\HeaderCheckerManager;
+use Jose\Component\Core\AlgorithmManager;
 use Jose\Component\Core\JWKSet;
-use Jose\Easy\Load;
-use Jose\Easy\Validate;
+use Jose\Component\Signature\Algorithm;
+use Jose\Component\Signature\JWSLoader;
+use Jose\Component\Signature\JWSTokenSupport;
+use Jose\Component\Signature\JWSVerifier;
+use Jose\Component\Signature\Serializer\CompactSerializer;
+use Jose\Component\Signature\Serializer\JWSSerializerManager;
 
 class LocalTokenValidator extends TokenValidatorBase
 {
@@ -46,27 +55,54 @@ class LocalTokenValidator extends TokenValidatorBase
         // The spec doesn't allow this, but just to be sure
         assert(!in_array('none', $algs, true));
 
-        // Checks not needed/used here:
-        // * sub(): This is the keycloak user ID by default, nothing we know beforehand
-        // * jti(): Nothing we know beforehand
-        // * aud(): The audience needs to be checked afterwards with checkAudience()
+        $keySet = JWKSet::createFromKeyData($jwks);
+
+        $serializerManager = new JWSSerializerManager([
+            new CompactSerializer(),
+        ]);
+
+        $algorithmManager = new AlgorithmManager([
+            new Algorithm\RS256(),
+            new Algorithm\RS384(),
+            new Algorithm\RS512(),
+            new Algorithm\PS256(),
+            new Algorithm\PS384(),
+            new Algorithm\PS512(),
+        ]);
+
+        $jwsVerifier = new JWSVerifier(
+            $algorithmManager
+        );
+
+        $headerCheckerManager = new HeaderCheckerManager(
+            [new AlgorithmChecker($algs, true)],
+            [new JWSTokenSupport()],
+        );
+
+        $jwsLoader = new JWSLoader(
+            $serializerManager,
+            $jwsVerifier,
+            $headerCheckerManager
+        );
+
         try {
-            $keySet = JWKSet::createFromKeyData($jwks);
-            $validate = Load::jws($accessToken);
-            $validate = $validate
-                ->algs($algs)
-                ->keyset($keySet)
-                ->exp($this->leewaySeconds)
-                ->iat($this->leewaySeconds)
-                ->nbf($this->leewaySeconds)
-                ->iss($issuer);
-            assert($validate instanceof Validate);
-            $jwtResult = $validate->run();
+            $jws = $jwsLoader->loadAndVerifyWithKeySet($accessToken, $keySet, $signature);
+            $jwt = json_decode($jws->getPayload(), true, 512, JSON_THROW_ON_ERROR);
+
+            // Checks not needed/used here:
+            // * sub: This is the keycloak user ID by default, nothing we know beforehand
+            // * jti: Nothing we know beforehand
+            // * aud: The audience needs to be checked afterwards with checkAudience()
+            $claimCheckerManager = new ClaimCheckerManager([
+                new Checker\IssuedAtChecker($this->leewaySeconds),
+                new Checker\NotBeforeChecker($this->leewaySeconds),
+                new Checker\ExpirationTimeChecker($this->leewaySeconds),
+                new Checker\IssuerChecker([$issuer]),
+            ]);
+            $claimCheckerManager->check($jwt);
         } catch (\Exception $e) {
             throw new TokenValidationException('Token validation failed: '.$e->getMessage());
         }
-
-        $jwt = $jwtResult->claims->all();
 
         // XXX: Keycloak will add extra data to the token returned by introspection, mirror this behaviour here
         // to avoid breakage when switching between local/remote validation.

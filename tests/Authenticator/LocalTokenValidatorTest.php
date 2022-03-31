@@ -152,7 +152,7 @@ class LocalTokenValidatorTest extends TestCase
         $jwt = $this->getJWT();
         $payload = explode('.', $jwt)[1];
         $noneToken = base64_encode('{"alg":"none","typ":"JWT"}').'.'.$payload.'.';
-        $this->expectExceptionMessageMatches('/Unsupported algorithm/');
+        $this->expectExceptionMessageMatches('/Unable to load and verify the token/');
         $this->tokenValidator->validate($noneToken);
     }
 
@@ -190,7 +190,7 @@ class LocalTokenValidatorTest extends TestCase
         $parts = explode('.', $jwt);
         $parts[1] = 'REVBREJFRUY=';
 
-        $this->expectExceptionMessageMatches('/Invalid signature/');
+        $this->expectExceptionMessageMatches('/Unable to load and verify the token/');
         $this->tokenValidator->validate(implode('.', $parts));
     }
 
