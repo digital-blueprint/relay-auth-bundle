@@ -10,9 +10,11 @@ use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use Jose\Component\Core\AlgorithmManager;
 use Jose\Component\Core\JWK;
-use Jose\Easy\Build;
-use Jose\Easy\JWSBuilder;
+use Jose\Component\Signature\Algorithm\RS256;
+use Jose\Component\Signature\JWSBuilder;
+use Jose\Component\Signature\Serializer\CompactSerializer;
 use PHPUnit\Framework\TestCase;
 
 class LocalTokenValidatorTest extends TestCase
@@ -63,24 +65,35 @@ class LocalTokenValidatorTest extends TestCase
         ];
     }
 
-    private function getJWT(array $options = [])
+    private function getJWT(array $options = []): string
     {
         $jwk = $this->getJWK();
 
         $time = $options['time'] ?? time();
-        $builder = Build::jws()
-            ->exp($time + 3600)
-            ->iat($time)
-            ->nbf($time)
-            ->jti('0123456789')
-            ->alg('RS256')
-            ->iss($options['issuer'] ?? $this->oid->getProviderConfig()->getIssuer())
-            ->aud('audience1')
-            ->aud('audience2')
-            ->sub('subject');
-        assert($builder instanceof JWSBuilder);
 
-        return $builder->sign($jwk);
+        $payload = json_encode([
+            'exp' => $time + 3600,
+            'iat' => $time,
+            'nbf' => $time,
+            'jti' => '0123456789',
+            'iss' => $options['issuer'] ?? $this->oid->getProviderConfig()->getIssuer(),
+            'aud' => ['audience1', 'audience2'],
+            'sub' => 'subject',
+        ]);
+
+        $algorithmManager = new AlgorithmManager([
+            new RS256(),
+        ]);
+        $serializer = new CompactSerializer();
+        $jwsBuilder = new JWSBuilder($algorithmManager);
+
+        $jws = $jwsBuilder
+            ->create()
+            ->withPayload($payload)
+            ->addSignature($jwk, ['alg' => 'RS256'])
+            ->build();
+
+        return $serializer->serialize($jws, 0);
     }
 
     private function mockResponses(array $responses)
