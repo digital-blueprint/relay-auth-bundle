@@ -65,3 +65,15 @@ the top left).
 
 We are looking into providing a frontend web component that works with all OIDC
 serves to remove this dependency.
+
+
+## Remote Validation Client with Keycloak
+
+To create a client which can validate/introspect tokens in Keycloak create a
+new client with an ID of your choosing:
+
+* Switch the "Access Type" to confidential
+* Enable "Service Accounts Enabled"
+
+* `remote_validation_id` is the "Client ID" of the client visible on the "Settings" page
+* `remote_validation_secret` is the "Secret" of the client visible on the "Credentials" page
