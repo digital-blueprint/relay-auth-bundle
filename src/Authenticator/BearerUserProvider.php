@@ -38,10 +38,15 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
         return $config['local_validation_leeway'];
     }
 
+    public function usesRemoteValidation(): bool
+    {
+        return $this->config['remote_validation'];
+    }
+
     public function loadUserByToken(string $accessToken): UserInterface
     {
         $config = $this->config;
-        if (!$config['remote_validation']) {
+        if (!$this->usesRemoteValidation()) {
             $leeway = $config['local_validation_leeway'];
             $validator = new LocalTokenValidator($this->oidProvider, $leeway);
         } else {

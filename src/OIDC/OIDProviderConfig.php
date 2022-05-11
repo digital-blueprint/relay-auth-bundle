@@ -42,6 +42,11 @@ class OIDProviderConfig
         return $this->config['jwks_uri'];
     }
 
+    public function getTokenEndpoint(): ?string
+    {
+        return $this->config['token_endpoint'] ?? null;
+    }
+
     public function getIntrospectionEndpoint(): ?string
     {
         return $this->config['introspection_endpoint'] ?? null;

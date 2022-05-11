@@ -51,6 +51,21 @@ class HealthCheck implements CheckInterface
         $this->oidcProvider->getJWKs();
     }
 
+    public function checkRemoteValidation()
+    {
+        if (!$this->userProvider->usesRemoteValidation()) {
+            // Not configured, so don't test
+            return;
+        }
+
+        // Create a dummy token, and introspect it
+        $accessToken = $this->oidcProvider->createToken();
+        $token = $this->oidcProvider->introspectToken($accessToken);
+        if ($token['active'] !== true) {
+            throw new \RuntimeException('invalid token');
+        }
+    }
+
     public function checkTimeSync()
     {
         $providerTime = $this->oidcProvider->getProviderDateTime();
@@ -68,6 +83,7 @@ class HealthCheck implements CheckInterface
         $results[] = $this->checkMethod('Check if the OIDC config can be fetched', [$this, 'checkConfig']);
         $results[] = $this->checkMethod('Check if the OIDC public key can be fetched', [$this, 'checkPublicKey']);
         $results[] = $this->checkMethod('Check if the OIDC server time is in sync', [$this, 'checkTimeSync']);
+        $results[] = $this->checkMethod('Check if remote validation works (if enabled)', [$this, 'checkRemoteValidation']);
 
         return $results;
     }

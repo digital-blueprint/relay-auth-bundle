@@ -139,6 +139,49 @@ class OIDProvider implements LoggerAwareInterface
     }
 
     /**
+     * This creates a token using the introspection client. Mainly for testing
+     * introspection during health checks.
+     */
+    public function createToken(): string
+    {
+        $providerConfig = $this->getProviderConfig();
+        $tokenEndpoint = $providerConfig->getTokenEndpoint();
+        if ($tokenEndpoint === null) {
+            throw new OIDError('No token endpoint');
+        }
+
+        $authId = $this->config['remote_validation_id'] ?? '';
+        $authSecret = $this->config['remote_validation_secret'] ?? '';
+        if ($authId === '' || $authSecret === '') {
+            throw new OIDError('remote_validation_id/secret not set');
+        }
+
+        $client = $this->getClient();
+
+        try {
+            // keep in mind that even if we are doing this request with a different client id the data returned will be
+            // from the client id of token $token (that's important for mapped attributes)
+            $response = $client->request('POST', $tokenEndpoint, [
+                'auth' => [$authId, $authSecret],
+                'form_params' => [
+                    'grant_type' => 'client_credentials',
+                ],
+            ]);
+        } catch (GuzzleException $e) {
+            throw new OIDError('Creating a token failed: '.$e->getMessage());
+        }
+
+        $data = (string) $response->getBody();
+        try {
+            $decoded = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new OIDError('Token: invalid json: '.$e->getMessage());
+        }
+
+        return $decoded['access_token'];
+    }
+
+    /**
      * Introspect the token via the provider. Note that you have to check the result to see if the
      * token is valid/active.
      *
