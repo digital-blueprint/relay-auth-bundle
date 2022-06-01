@@ -1,5 +1,7 @@
 # Overview
 
+Source: https://gitlab.tugraz.at/dbp/relay/dbp-relay-auth-bundle
+
 The auth bundle connects the core bundle with an OIDC server. For each request
 it validates the passed access token, creates a Symonfy user and assigns Symfony
 roles to that user.
