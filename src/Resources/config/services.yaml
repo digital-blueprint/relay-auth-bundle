@@ -34,3 +34,8 @@ services:
 
   Dbp\Relay\AuthBundle\API\UserRolesInterface:
     '@Dbp\Relay\AuthBundle\Service\DefaultUserRoles'
+
+  Dbp\Relay\AuthBundle\Authorization\AuthorizationDataProviderProvider:
+    autowire: true
+    autoconfigure: true
+    arguments: [!tagged auth.authorization_data_provider]

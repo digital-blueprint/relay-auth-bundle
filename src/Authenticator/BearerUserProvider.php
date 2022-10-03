@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Authenticator;
 
+use Dbp\Relay\AuthBundle\Authorization\AuthorizationDataProviderProvider;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Psr\Log\LoggerAwareInterface;
@@ -18,12 +19,21 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
     private $config;
     private $userSession;
     private $oidProvider;
+    private $authorizationDataProviders;
 
     public function __construct(UserSessionInterface $userSession, OIDProvider $oidProvider)
     {
         $this->userSession = $userSession;
         $this->config = [];
         $this->oidProvider = $oidProvider;
+    }
+
+    /**
+     * @required
+     */
+    public function injectAuthorizationDataProvders(AuthorizationDataProviderProvider $provider): void
+    {
+        $this->authorizationDataProviders = $provider->getAuthorizationDataProviders();
     }
 
     public function setConfig(array $config)
@@ -82,9 +92,15 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
         $identifier = $session->getUserIdentifier();
         $userRoles = $session->getUserRoles();
 
-        return new BearerUser(
+        $user = new BearerUser(
             $identifier,
             $userRoles
         );
+
+        if ($this->authorizationDataProviders !== null) {
+            $user->setAuthorizationDataProviders($this->authorizationDataProviders);
+        }
+
+        return $user;
     }
 }
