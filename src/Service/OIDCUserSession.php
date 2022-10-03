@@ -55,6 +55,11 @@ class OIDCUserSession implements UserSessionInterface
         return $this->userRoles->getRoles($userIdentifier, $scopes);
     }
 
+    public function getUserScopes(): array
+    {
+        return self::getScopes($this->jwt);
+    }
+
     /**
      * Given a token returns if the token was generated through a client credential flow.
      */
