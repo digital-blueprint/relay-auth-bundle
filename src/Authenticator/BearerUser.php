@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Dbp\Relay\AuthBundle\Authenticator;
 
 use Dbp\Relay\AuthBundle\API\AuthorizationDataProviderInterface;
-use Dbp\Relay\CoreBundle\API\UserInterface;
+use Dbp\Relay\CoreBundle\API\UserInterface as DbpUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
-class BearerUser implements UserInterface
+class BearerUser implements DbpUserInterface, SymfonyUserInterface
 {
     /** @var string[] */
     private $rolesDeprecated;
