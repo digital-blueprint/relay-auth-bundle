@@ -23,9 +23,15 @@ class BearerAuthenticator extends AbstractAuthenticator implements LoggerAwareIn
 
     private $userProvider;
 
-    public function __construct(BearerUserProviderInterface $userProvider)
+    /**
+     * @var OIDCUserSessionProviderInterface
+     */
+    private $userSession;
+
+    public function __construct(OIDCUserSessionProviderInterface $userSession, BearerUserProviderInterface $userProvider)
     {
         $this->userProvider = $userProvider;
+        $this->userSession = $userSession;
     }
 
     public function supports(Request $request): ?bool
@@ -54,8 +60,11 @@ class BearerAuthenticator extends AbstractAuthenticator implements LoggerAwareIn
 
         $user = $this->userProvider->loadUserByToken($token);
 
-        return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier(), function ($token) use ($user) {
+        $passport = new SelfValidatingPassport(new UserBadge($user->getUserIdentifier(), function ($token) use ($user) {
             return $user;
         }));
+        $passport->setAttribute('relay_user_session_provider', $this->userSession);
+
+        return $passport;
     }
 }

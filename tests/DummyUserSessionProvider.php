@@ -4,33 +4,24 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Tests;
 
-use Dbp\Relay\CoreBundle\API\UserSessionInterface;
+use Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface;
 
-class DummyUserSession implements UserSessionInterface
+class DummyUserSessionProvider implements OIDCUserSessionProviderInterface
 {
-    private $jwt;
     private $id;
-    private $roles;
 
-    public function __construct(?string $id = 'id', array $roles = [])
+    public function __construct(?string $id = 'id')
     {
         $this->id = $id;
-        $this->roles = $roles;
     }
 
     public function setSessionToken(?array $jwt): void
     {
-        $this->jwt = $jwt;
     }
 
     public function getUserIdentifier(): ?string
     {
         return $this->id;
-    }
-
-    public function getUserRoles(): array
-    {
-        return $this->roles;
     }
 
     public function getSessionLoggingId(): ?string

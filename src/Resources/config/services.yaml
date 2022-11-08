@@ -7,9 +7,12 @@ services:
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\AuthBundle\Service\OIDCUserSession:
+  Dbp\Relay\AuthBundle\Service\OIDCUserSessionProvider:
     autowire: true
     autoconfigure: true
+
+  Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface:
+    '@Dbp\Relay\AuthBundle\Service\OIDCUserSessionProvider'
 
   Dbp\Relay\AuthBundle\OIDC\OIDProvider:
     autowire: true
@@ -20,9 +23,6 @@ services:
 
   Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface:
     '@Dbp\Relay\AuthBundle\Authenticator\BearerAuthenticator'
-
-  Dbp\Relay\CoreBundle\API\UserSessionInterface:
-    '@Dbp\Relay\AuthBundle\Service\OIDCUserSession'
 
   Dbp\Relay\AuthBundle\Service\DefaultUserRoles:
     autowire: true

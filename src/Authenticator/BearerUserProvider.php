@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Authenticator;
 
+use Dbp\Relay\AuthBundle\API\UserRolesInterface;
+use Dbp\Relay\AuthBundle\Helpers\Tools;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
-use Dbp\Relay\CoreBundle\API\UserSessionInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -18,12 +19,17 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
     private $config;
     private $userSession;
     private $oidProvider;
+    /**
+     * @var UserRolesInterface
+     */
+    private $userRoles;
 
-    public function __construct(UserSessionInterface $userSession, OIDProvider $oidProvider)
+    public function __construct(OIDCUserSessionProviderInterface $userSession, OIDProvider $oidProvider, UserRolesInterface $userRoles)
     {
         $this->userSession = $userSession;
         $this->config = [];
         $this->oidProvider = $oidProvider;
+        $this->userRoles = $userRoles;
     }
 
     public function setConfig(array $config)
@@ -79,8 +85,9 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
     {
         $session = $this->userSession;
         $session->setSessionToken($jwt);
+        $scopes = Tools::extractScopes($jwt);
         $identifier = $session->getUserIdentifier();
-        $userRoles = $session->getUserRoles();
+        $userRoles = $this->userRoles->getRoles($identifier, $scopes);
 
         return new BearerUser(
             $identifier,

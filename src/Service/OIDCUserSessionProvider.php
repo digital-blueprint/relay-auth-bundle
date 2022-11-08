@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Service;
 
-use Dbp\Relay\AuthBundle\API\UserRolesInterface;
-use Dbp\Relay\CoreBundle\API\UserSessionInterface;
+use Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface;
+use Dbp\Relay\AuthBundle\Helpers\Tools;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class OIDCUserSession implements UserSessionInterface
+class OIDCUserSessionProvider implements OIDCUserSessionProviderInterface
 {
     /**
      * @var ?array
@@ -20,16 +20,10 @@ class OIDCUserSession implements UserSessionInterface
      */
     private $parameters;
 
-    /**
-     * @var UserRolesInterface
-     */
-    private $userRoles;
-
-    public function __construct(ParameterBagInterface $parameters, UserRolesInterface $userRoles)
+    public function __construct(ParameterBagInterface $parameters)
     {
         $this->jwt = null;
         $this->parameters = $parameters;
-        $this->userRoles = $userRoles;
     }
 
     public function getUserIdentifier(): ?string
@@ -41,31 +35,12 @@ class OIDCUserSession implements UserSessionInterface
         return $this->jwt['username'] ?? null;
     }
 
-    private static function getScopes($jwt): array
-    {
-        return preg_split('/\s+/', $jwt['scope'] ?? '', -1, PREG_SPLIT_NO_EMPTY);
-    }
-
-    public function getUserRoles(): array
-    {
-        assert($this->jwt !== null);
-        $scopes = self::getScopes($this->jwt);
-        $userIdentifier = $this->getUserIdentifier();
-
-        return $this->userRoles->getRoles($userIdentifier, $scopes);
-    }
-
-    public function getUserScopes(): array
-    {
-        return self::getScopes($this->jwt);
-    }
-
     /**
      * Given a token returns if the token was generated through a client credential flow.
      */
     public static function isServiceAccountToken(array $jwt): bool
     {
-        $scopes = self::getScopes($jwt);
+        $scopes = Tools::extractScopes($jwt);
 
         // XXX: This is the main difference I found compared to other flows, but that's a Keycloak
         // implementation detail I guess.

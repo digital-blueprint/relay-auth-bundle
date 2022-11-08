@@ -8,6 +8,7 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use Dbp\Relay\AuthBundle\Authenticator\BearerAuthenticator;
 use Dbp\Relay\AuthBundle\Authenticator\BearerUser;
 use Dbp\Relay\AuthBundle\Tests\DummyUserProvider;
+use Dbp\Relay\AuthBundle\Tests\DummyUserSessionProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\NullToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -20,7 +21,7 @@ class BearerAuthenticatorTest extends ApiTestCase
     {
         $user = new BearerUser('foo', ['role']);
         $provider = new DummyUserProvider($user, 'nope');
-        $auth = new BearerAuthenticator($provider);
+        $auth = new BearerAuthenticator(new DummyUserSessionProvider(), $provider);
 
         $req = new Request();
         $this->expectException(BadCredentialsException::class);
@@ -31,7 +32,7 @@ class BearerAuthenticatorTest extends ApiTestCase
     {
         $user = new BearerUser('foo', ['role']);
         $provider = new DummyUserProvider($user, 'nope');
-        $auth = new BearerAuthenticator($provider);
+        $auth = new BearerAuthenticator(new DummyUserSessionProvider(), $provider);
 
         $req = new Request();
         $req->headers->set('Authorization', 'Bearer nope');
@@ -45,7 +46,7 @@ class BearerAuthenticatorTest extends ApiTestCase
     {
         $user = new BearerUser('foo', ['role']);
         $provider = new DummyUserProvider($user, 'bar');
-        $auth = new BearerAuthenticator($provider);
+        $auth = new BearerAuthenticator(new DummyUserSessionProvider(), $provider);
 
         $this->assertFalse($auth->supports(new Request()));
 
@@ -58,7 +59,7 @@ class BearerAuthenticatorTest extends ApiTestCase
     {
         $user = new BearerUser('foo', ['role']);
         $provider = new DummyUserProvider($user, 'bar');
-        $auth = new BearerAuthenticator($provider);
+        $auth = new BearerAuthenticator(new DummyUserSessionProvider(), $provider);
         $response = $auth->onAuthenticationSuccess(new Request(), new NullToken(), 'firewall');
         $this->assertNull($response);
     }
@@ -67,7 +68,7 @@ class BearerAuthenticatorTest extends ApiTestCase
     {
         $user = new BearerUser('foo', ['role']);
         $provider = new DummyUserProvider($user, 'bar');
-        $auth = new BearerAuthenticator($provider);
+        $auth = new BearerAuthenticator(new DummyUserSessionProvider(), $provider);
         $response = $auth->onAuthenticationFailure(new Request(), new AuthenticationException());
         $this->assertSame(403, $response->getStatusCode());
         $this->assertNotNull(json_decode($response->getContent()));
