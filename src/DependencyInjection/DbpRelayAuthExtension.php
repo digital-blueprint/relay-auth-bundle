@@ -39,6 +39,8 @@ class DbpRelayAuthExtension extends ConfigurableExtension implements PrependExte
     {
         $config = $container->getExtensionConfig($this->getAlias())[0];
         $this->extendArrayParameter($container, 'dbp_api.twig_globals', [
+            'oidc_server_url' => $config['server_url'] ?? '',
+            'oidc_frontend_client_id' => $config['frontend_client_id'] ?? '',
             'keycloak_server_url' => $config['frontend_keycloak_server'] ?? '',
             'keycloak_realm' => $config['frontend_keycloak_realm'] ?? '',
             'keycloak_frontend_client_id' => $config['frontend_keycloak_client_id'] ?? '',

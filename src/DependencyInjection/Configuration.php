@@ -46,17 +46,25 @@ class Configuration implements ConfigurationInterface
                     ->example('mysecret')
                 ->end()
 
-                // API docs. This is still Keycloak specific because we only have a keycloak
-                // web component right now.
+                // API Frontend (API docs etc)
+                ->scalarNode('frontend_client_id')
+                    ->info('The client ID for the OIDC client (authorization code flow) used for API docs and other frontends provided by the API itself')
+                    ->example('client-docs')
+                ->end()
+
+                // [DEPRECATED]
                 ->scalarNode('frontend_keycloak_server')
+                    ->setDeprecated('dbp/relay-auth-bundle', '0.1.12', 'No longer needed')
                     ->info('The Keycloak server base URL')
                     ->example('https://keycloak.example.com/auth')
                 ->end()
                 ->scalarNode('frontend_keycloak_realm')
+                    ->setDeprecated('dbp/relay-auth-bundle', '0.1.12', 'No longer needed')
                     ->info('The keycloak realm')
                     ->example('client-docs')
                 ->end()
                 ->scalarNode('frontend_keycloak_client_id')
+                    ->setDeprecated('dbp/relay-auth-bundle', '0.1.12', 'Use "frontend_client_id" instead')
                     ->info('The ID for the keycloak client (authorization code flow) used for API docs or similar')
                     ->example('client-docs')
                 ->end()
