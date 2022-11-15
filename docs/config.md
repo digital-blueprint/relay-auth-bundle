@@ -20,12 +20,8 @@ dbp_relay_auth:
     remote_validation_id: ~ # Example: client-token-check
     # The client secret for the client referenced by client_id (optional)
     remote_validation_secret: ~ # Example: mysecret
-    # The Keycloak server base URL
-    frontend_keycloak_server: ~ # Example: 'https://keycloak.example.com/auth'
-    # The keycloak realm
-    frontend_keycloak_realm: ~ # Example: client-docs
-    # The ID for the keycloak client (authorization code flow) used for API docs or similar
-    frontend_keycloak_client_id: ~ # Example: client-docs
+    # The client ID for the OIDC client (authorization code flow) used for API docs and other frontends provided by the API itself
+    frontend_client_id:   ~ # Example: client-docs
 ```
 
 ## Configuration Discovery
@@ -54,17 +50,6 @@ There are two modes of operation:
 * **Remote validation**: The bundle passes the access token to the OIDC server
   introspection endpoint for each request. This adds overhead to each request but
   everything is handled by the OIDC server.
-
-
-## Frontend Keycloak Config (FIXME)
-
-At this time the bundle is still depending on Keycloak as a specific OIDC server
-for some optional functionality. The auth bundle handles the OIDC login
-component of the OpenAPI docs provided by the core bundle (the login button at
-the top left).
-
-We are looking into providing a frontend web component that works with all OIDC
-serves to remove this dependency.
 
 
 ## Remote Validation Client with Keycloak

@@ -1,3 +1,8 @@
+# v0.1.12 - 2022-11-15
+
+* Added new `frontend_client_id` config entry as a replacement for `frontend_keycloak_client_id`
+* Deprecated config entries: `frontend_keycloak_server`, `frontend_keycloak_realm`, `frontend_keycloak_client_id`
+
 # v0.1.9 - 2022-05-11
 
 * Add a health check for remote token validation via the introspection endpoint
