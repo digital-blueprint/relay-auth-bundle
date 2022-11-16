@@ -54,6 +54,11 @@ class OIDCUserSessionProvider implements OIDCUserSessionProviderInterface
         $this->jwt = $jwt;
     }
 
+    public function getScopes(): array
+    {
+        return Tools::extractScopes($this->jwt ?? []);
+    }
+
     public function getSessionLoggingId(): string
     {
         $unknown = 'unknown';

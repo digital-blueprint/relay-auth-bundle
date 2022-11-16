@@ -9,6 +9,10 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
+    public const NAME_ATTRIBUTE = 'name';
+    public const SCOPE_ATTRIBUTE = 'scope';
+    public const ATTRIBUTES_ATTRIBUTE = 'authorization_attributes';
+
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('dbp_relay_auth');
@@ -67,6 +71,15 @@ class Configuration implements ConfigurationInterface
                     ->setDeprecated('dbp/relay-auth-bundle', '0.1.12', 'Use "frontend_client_id" instead')
                     ->info('The ID for the keycloak client (authorization code flow) used for API docs or similar')
                     ->example('client-docs')
+                ->end()
+                ->arrayNode(self::ATTRIBUTES_ATTRIBUTE)
+                    ->info('The authorization attributes that are available for users and derived from OIDC token scopes')
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode(self::NAME_ATTRIBUTE)->end()
+                            ->scalarNode(self::SCOPE_ATTRIBUTE)->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
 

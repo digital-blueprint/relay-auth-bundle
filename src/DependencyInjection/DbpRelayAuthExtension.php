@@ -6,6 +6,7 @@ namespace Dbp\Relay\AuthBundle\DependencyInjection;
 
 use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Dbp\Relay\AuthBundle\Service\AuthorizationDataProvider;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,6 +34,9 @@ class DbpRelayAuthExtension extends ConfigurableExtension implements PrependExte
         $definition = $container->getDefinition(OIDProvider::class);
         $definition->addMethodCall('setConfig', [$mergedConfig]);
         $definition->addMethodCall('setCache', [$cacheDef]);
+
+        $definition = $container->getDefinition(AuthorizationDataProvider::class);
+        $definition->addMethodCall('setConfig', [$mergedConfig]);
     }
 
     public function prepend(ContainerBuilder $container)
