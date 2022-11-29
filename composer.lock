@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf1b5a6f9a4b40dd9a855a73345cf4f5",
+    "content-hash": "4117dec00c6ab0dead123606e4b38bf9",
     "packages": [
         {
             "name": "api-platform/core",
@@ -229,11 +229,11 @@
         },
         {
             "name": "dbp/relay-core-bundle",
-            "version": "v0.1.61",
+            "version": "v0.1.62",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle",
-                "reference": "996fc7d43361720e3749401fd0f005ed3d97404b"
+                "reference": "4c468456c2027305e98d59e8b8ed2a6a26fd9a32"
             },
             "require": {
                 "api-platform/core": "^2.6.8 <2.7.0",
@@ -297,7 +297,7 @@
                 "AGPL-3.0-or-later"
             ],
             "description": "The core bundle of the Relay API gateway",
-            "time": "2022-11-23T12:35:13+00:00"
+            "time": "2022-11-29T14:54:53+00:00"
         },
         {
             "name": "doctrine/annotations",

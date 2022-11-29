@@ -31,7 +31,7 @@ class AuthorizationDataProvider implements AuthorizationDataProviderInterface
         return array_keys($this->attributeToScopeMap);
     }
 
-    public function getUserAttributes(string $userIdentifier): array
+    public function getUserAttributes(?string $userIdentifier): array
     {
         $userScopes = $this->userSessionProvider->getScopes();
         $userAttributes = [];
