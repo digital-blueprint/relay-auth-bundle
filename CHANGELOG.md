@@ -1,3 +1,7 @@
+# v0.1.15
+
+* Fix tests with newer core bundle versions
+
 # v0.1.12 - 2022-11-15
 
 * Added new `frontend_client_id` config entry as a replacement for `frontend_keycloak_client_id`
