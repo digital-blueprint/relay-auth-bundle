@@ -5,7 +5,7 @@ created via `./bin/console config:dump-reference DbpRelayAuthBundle | sed '/^$/d
 ```yaml
 # Default configuration for "DbpRelayAuthBundle"
 dbp_relay_auth:
-    # The base URL for the OIDC server (in case of Keycloak fort the specific realm)
+    # The base URL for the OIDC server (in case of Keycloak for the specific realm)
     server_url:           ~ # Example: 'https://keycloak.example.com/auth/realms/my-realm'
     # If set only tokens which contain this audience are accepted (optional)
     required_audience:    ~ # Example: my-api
