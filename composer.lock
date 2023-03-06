@@ -8057,16 +8057,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.15.3",
+            "version": "v4.15.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039"
+                "reference": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/570e980a201d8ed0236b0a62ddf2c9cbb2034039",
-                "reference": "570e980a201d8ed0236b0a62ddf2c9cbb2034039",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/6bb5176bc4af8bcb7d926f88718db9b96a2d4290",
+                "reference": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290",
                 "shasum": ""
             },
             "require": {
@@ -8107,9 +8107,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.3"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.4"
             },
-            "time": "2023-01-16T22:05:37+00:00"
+            "time": "2023-03-05T19:49:14+00:00"
         },
         {
             "name": "openlss/lib-array2xml",
@@ -9968,16 +9968,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.19",
+            "version": "v5.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "dccb8d251a9017d5994c988b034d3e18aaabf740"
+                "reference": "c77433ddc6cdc689caf48065d9ea22ca0853fbd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/dccb8d251a9017d5994c988b034d3e18aaabf740",
-                "reference": "dccb8d251a9017d5994c988b034d3e18aaabf740",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c77433ddc6cdc689caf48065d9ea22ca0853fbd9",
+                "reference": "c77433ddc6cdc689caf48065d9ea22ca0853fbd9",
                 "shasum": ""
             },
             "require": {
@@ -10047,7 +10047,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.19"
+                "source": "https://github.com/symfony/console/tree/v5.4.21"
             },
             "funding": [
                 {
@@ -10063,7 +10063,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:32:19+00:00"
+            "time": "2023-02-25T16:59:41+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -10307,16 +10307,16 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.4.19",
+            "version": "v5.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "b03c99236445492f20c61666e8f7e5d388b078e5"
+                "reference": "4fe5cf6ede71096839f0e4b4444d65dd3a7c1eb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/b03c99236445492f20c61666e8f7e5d388b078e5",
-                "reference": "b03c99236445492f20c61666e8f7e5d388b078e5",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/4fe5cf6ede71096839f0e4b4444d65dd3a7c1eb9",
+                "reference": "4fe5cf6ede71096839f0e4b4444d65dd3a7c1eb9",
                 "shasum": ""
             },
             "require": {
@@ -10356,7 +10356,7 @@
                 "options"
             ],
             "support": {
-                "source": "https://github.com/symfony/options-resolver/tree/v5.4.19"
+                "source": "https://github.com/symfony/options-resolver/tree/v5.4.21"
             },
             "funding": [
                 {
@@ -10372,7 +10372,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:32:19+00:00"
+            "time": "2023-02-14T08:03:56+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -10459,16 +10459,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v5.4.19",
+            "version": "v5.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "bd2b066090fd6a67039371098fa25a84cb2679ec"
+                "reference": "f83692cd869a6f2391691d40a01e8acb89e76fee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/bd2b066090fd6a67039371098fa25a84cb2679ec",
-                "reference": "bd2b066090fd6a67039371098fa25a84cb2679ec",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/f83692cd869a6f2391691d40a01e8acb89e76fee",
+                "reference": "f83692cd869a6f2391691d40a01e8acb89e76fee",
                 "shasum": ""
             },
             "require": {
@@ -10501,7 +10501,7 @@
             "description": "Provides a way to profile code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/stopwatch/tree/v5.4.19"
+                "source": "https://github.com/symfony/stopwatch/tree/v5.4.21"
             },
             "funding": [
                 {
@@ -10517,7 +10517,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:32:19+00:00"
+            "time": "2023-02-14T08:03:56+00:00"
         },
         {
             "name": "theseer/tokenizer",
