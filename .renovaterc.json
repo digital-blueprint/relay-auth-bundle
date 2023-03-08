@@ -30,6 +30,10 @@
     {
       "matchPackageNames": ["vimeo/psalm"],
       "allowedVersions": "<5"
+    },
+    {
+      "matchPackageNames": ["phpunit/phpunit"],
+      "allowedVersions": "<10"
     }
   ],
   "js": {
