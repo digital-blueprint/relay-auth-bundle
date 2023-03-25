@@ -229,16 +229,16 @@
         },
         {
             "name": "dbp/relay-core-bundle",
-            "version": "v0.1.90",
+            "version": "v0.1.91",
             "source": {
                 "type": "git",
                 "url": "https://github.com/digital-blueprint/relay-core-bundle.git",
-                "reference": "da90f97ea72c6e0361fa18de31dc0e0c141b1376"
+                "reference": "9a93c21af9466b47f9763420d668f49c5bf08ac8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digital-blueprint/relay-core-bundle/zipball/da90f97ea72c6e0361fa18de31dc0e0c141b1376",
-                "reference": "da90f97ea72c6e0361fa18de31dc0e0c141b1376",
+                "url": "https://api.github.com/repos/digital-blueprint/relay-core-bundle/zipball/9a93c21af9466b47f9763420d668f49c5bf08ac8",
+                "reference": "9a93c21af9466b47f9763420d668f49c5bf08ac8",
                 "shasum": ""
             },
             "require": {
@@ -306,9 +306,9 @@
             "description": "The core bundle of the Relay API gateway",
             "support": {
                 "issues": "https://github.com/digital-blueprint/relay-core-bundle/issues",
-                "source": "https://github.com/digital-blueprint/relay-core-bundle/tree/v0.1.90"
+                "source": "https://github.com/digital-blueprint/relay-core-bundle/tree/v0.1.91"
             },
-            "time": "2023-03-06T13:46:06+00:00"
+            "time": "2023-03-23T08:54:16+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -8330,16 +8330,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.7",
+            "version": "1.10.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975"
+                "reference": "0166aef76e066f0dd2adc2799bdadfa1635711e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b10ceb526d9607903c5b2673f1fc8775dbe48975",
-                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0166aef76e066f0dd2adc2799bdadfa1635711e9",
+                "reference": "0166aef76e066f0dd2adc2799bdadfa1635711e9",
                 "shasum": ""
             },
             "require": {
@@ -8388,7 +8388,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-16T15:24:20+00:00"
+            "time": "2023-03-24T10:28:16+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
