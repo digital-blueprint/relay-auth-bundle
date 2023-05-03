@@ -23,3 +23,8 @@ graph LR
     auth_bundle --> core_bundle
     auth_bundle --> oidc_server
 ```
+
+## Documentation
+
+* [Configuration](./config.md)
+* [Custom Roles Mapping](./roles.md)

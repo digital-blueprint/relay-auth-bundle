@@ -1,3 +1,13 @@
+# Configuration
+
+## Recipe
+
+The default [Symfony recipe](https://github.com/digital-blueprint/symfony-recipes/tree/main/dbp/relay-auth-bundle)
+creates a minimal configuration using two environment variables, which you have to fill out:
+
+* `AUTH_SERVER_URL`: The URL to the OIDC server (or in case of Keycloak to the realm on the server)
+* `AUTH_FRONTEND_CLIENT_ID`: The client ID for the API documentation page
+
 ## Bundle Configuration
 
 created via `./bin/console config:dump-reference DbpRelayAuthBundle | sed '/^$/d'`
