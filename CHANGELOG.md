@@ -1,3 +1,11 @@
+# v0.1.17
+
+* Use the global "cache.app" adapter for caching instead of always using the filesystem adapter
+
+# v0.1.16
+
+* Move to GitHub
+
 # v0.1.15
 
 * Fix tests with newer core bundle versions
