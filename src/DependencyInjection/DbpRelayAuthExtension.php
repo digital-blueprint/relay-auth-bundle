@@ -7,7 +7,6 @@ namespace Dbp\Relay\AuthBundle\DependencyInjection;
 use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use Dbp\Relay\AuthBundle\Service\AuthorizationDataProvider;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -24,16 +23,11 @@ class DbpRelayAuthExtension extends ConfigurableExtension implements PrependExte
         );
         $loader->load('services.yaml');
 
-        $cacheDef = $container->register('dbp_api.cache.auth.oid_provider', FilesystemAdapter::class);
-        $cacheDef->setArguments(['core-keycloak-cert', 60, '%kernel.cache_dir%/dbp/auth-oid-provider']);
-        $cacheDef->addTag('cache.pool');
-
         $definition = $container->getDefinition(BearerUserProvider::class);
         $definition->addMethodCall('setConfig', [$mergedConfig]);
 
         $definition = $container->getDefinition(OIDProvider::class);
         $definition->addMethodCall('setConfig', [$mergedConfig]);
-        $definition->addMethodCall('setCache', [$cacheDef]);
 
         $definition = $container->getDefinition(AuthorizationDataProvider::class);
         $definition->addMethodCall('setConfig', [$mergedConfig]);
