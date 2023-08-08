@@ -15,23 +15,30 @@ created via `./bin/console config:dump-reference DbpRelayAuthBundle | sed '/^$/d
 ```yaml
 # Default configuration for "DbpRelayAuthBundle"
 dbp_relay_auth:
-    # The base URL for the OIDC server (in case of Keycloak for the specific realm)
-    server_url:           ~ # Example: 'https://keycloak.example.com/auth/realms/my-realm'
-    # If set only tokens which contain this audience are accepted (optional)
-    required_audience:    ~ # Example: my-api
-    # How much the system time of the API server and the Keycloak server
-    # can be out of sync (in seconds). Used for local token validation.
-    local_validation_leeway: 120
-    # If remote validation should be used. If set to false the token signature will
-    # be only checked locally and not send to the keycloak server
-    remote_validation:    false
-    # The ID of the client (client credentials flow) used for remote token validation
-    # (optional)
-    remote_validation_id: ~ # Example: client-token-check
-    # The client secret for the client referenced by client_id (optional)
-    remote_validation_secret: ~ # Example: mysecret
-    # The client ID for the OIDC client (authorization code flow) used for API docs and other frontends provided by the API itself
-    frontend_client_id:   ~ # Example: client-docs
+  # The base URL for the OIDC server (in case of Keycloak fort the specific realm)
+  server_url:           ~ # Example: 'https://keycloak.example.com/auth/realms/my-realm'
+  # If set only tokens which contain this audience are accepted (optional)
+  required_audience:    ~ # Example: my-api
+  # How much the system time of the API server and the Keycloak server
+  # can be out of sync (in seconds). Used for local token validation.
+  local_validation_leeway: 120
+  # If remote validation should be used. If set to false the token signature will
+  # be only checked locally and not send to the keycloak server
+  remote_validation:    false
+  # The ID of the client (client credentials flow) used for remote token validation
+  # (optional)
+  remote_validation_id: ~ # Example: client-token-check
+  # The client secret for the client referenced by client_id (optional)
+  remote_validation_secret: ~ # Example: mysecret
+  # The client ID for the OIDC client (authorization code flow) used for API docs and other frontends provided by the API itself
+  frontend_client_id:   ~ # Example: client-docs
+  # The authorization attributes that are available for users and derived from OIDC token scopes
+  authorization_attributes:
+    # Prototype
+    -
+      name:                 ~
+      scope:                ~
+
 ```
 
 ## Configuration Discovery
