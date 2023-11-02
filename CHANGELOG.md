@@ -1,3 +1,7 @@
+# v0.1.18
+
+* Add caching for roles fetched via UserRolesInterface
+
 # v0.1.17
 
 * Use the global "cache.app" adapter for caching instead of always using the filesystem adapter
