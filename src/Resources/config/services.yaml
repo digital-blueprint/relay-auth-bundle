@@ -6,6 +6,8 @@ services:
   Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider:
     autowire: true
     autoconfigure: true
+    calls:
+      - setCache: [ '@dbp.relay.auth.cache.user_roles' ]
 
   Dbp\Relay\AuthBundle\Service\OIDCUserSessionProvider:
     autowire: true
@@ -42,6 +44,11 @@ services:
     autoconfigure: true
 
   dbp.relay.auth.cache.oid_provider:
+    parent: cache.app
+    tags:
+      - { name: 'cache.pool', default_lifetime: 60 }
+
+  dbp.relay.auth.cache.user_roles:
     parent: cache.app
     tags:
       - { name: 'cache.pool', default_lifetime: 60 }

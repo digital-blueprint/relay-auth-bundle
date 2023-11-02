@@ -9,8 +9,11 @@ use Dbp\Relay\AuthBundle\Helpers\Tools;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInterface
 {
@@ -23,6 +26,10 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
      * @var UserRolesInterface
      */
     private $userRoles;
+    /**
+     * @var CacheInterface
+     */
+    private $cachePool;
 
     public function __construct(OIDCUserSessionProviderInterface $userSession, OIDProvider $oidProvider, UserRolesInterface $userRoles)
     {
@@ -30,6 +37,7 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
         $this->config = [];
         $this->oidProvider = $oidProvider;
         $this->userRoles = $userRoles;
+        $this->cachePool = new ArrayAdapter();
     }
 
     public function setConfig(array $config)
@@ -47,6 +55,11 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
     public function usesRemoteValidation(): bool
     {
         return $this->config['remote_validation'];
+    }
+
+    public function setCache(CacheInterface $cachePool)
+    {
+        $this->cachePool = $cachePool;
     }
 
     public function loadUserByToken(string $accessToken): UserInterface
@@ -81,13 +94,27 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
         return $this->loadUserByValidatedToken($jwt);
     }
 
+    /**
+     * @return string[]
+     */
+    private function getUserRoles(?string $userIdentifier, array $scopes): array
+    {
+        $cacheKey = json_encode([$this->userSession->getSessionCacheKey(), $userIdentifier, $scopes], JSON_THROW_ON_ERROR);
+
+        return $this->cachePool->get($cacheKey, function (ItemInterface $item) use ($scopes, $userIdentifier): array {
+            $item->expiresAfter($this->userSession->getSessionTTL());
+
+            return $this->userRoles->getRoles($userIdentifier, $scopes);
+        });
+    }
+
     public function loadUserByValidatedToken(array $jwt): UserInterface
     {
         $session = $this->userSession;
         $session->setSessionToken($jwt);
         $scopes = Tools::extractScopes($jwt);
         $identifier = $session->getUserIdentifier();
-        $userRoles = $this->userRoles->getRoles($identifier, $scopes);
+        $userRoles = $this->getUserRoles($identifier, $scopes);
 
         return new BearerUser(
             $identifier,
