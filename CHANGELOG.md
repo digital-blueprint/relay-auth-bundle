@@ -1,3 +1,7 @@
+# v0.1.19
+
+* Add support for kevinrob/guzzle-cache-middleware v5
+
 # v0.1.18
 
 * Add caching for roles fetched via UserRolesInterface
