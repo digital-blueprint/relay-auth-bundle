@@ -8,15 +8,25 @@ use Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface;
 
 class DummyUserSessionProvider implements OIDCUserSessionProviderInterface
 {
+    /** @var string|null */
     private $id;
 
-    public function __construct(?string $id = 'id')
+    /** @var array */
+    private $scopes;
+
+    public function __construct(?string $id = 'id', array $scopes = [])
     {
         $this->id = $id;
+        $this->scopes = $scopes;
     }
 
     public function setSessionToken(?array $jwt): void
     {
+    }
+
+    public function getScopes(): array
+    {
+        return $this->scopes;
     }
 
     public function getUserIdentifier(): ?string

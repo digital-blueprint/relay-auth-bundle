@@ -9,4 +9,6 @@ use Dbp\Relay\CoreBundle\API\UserSessionProviderInterface;
 interface OIDCUserSessionProviderInterface extends UserSessionProviderInterface
 {
     public function setSessionToken(?array $jwt): void;
+
+    public function getScopes(): array;
 }
