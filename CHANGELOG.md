@@ -1,3 +1,8 @@
+# v0.1.20
+
+* Add some more unit tests
+* Removal of some deprecated API usages
+
 # v0.1.19
 
 * Add support for kevinrob/guzzle-cache-middleware v5
