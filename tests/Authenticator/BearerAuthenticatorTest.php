@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Tests\Authenticator;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Dbp\Relay\AuthBundle\Authenticator\BearerAuthenticator;
 use Dbp\Relay\AuthBundle\Authenticator\BearerUser;
 use Dbp\Relay\AuthBundle\Tests\DummyUserProvider;

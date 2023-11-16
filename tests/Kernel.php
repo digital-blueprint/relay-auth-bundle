@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Tests;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle;
+use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
 use Dbp\Relay\AuthBundle\DbpRelayAuthBundle;
 use Dbp\Relay\CoreBundle\DbpRelayCoreBundle;
 use Nelmio\CorsBundle\NelmioCorsBundle;
