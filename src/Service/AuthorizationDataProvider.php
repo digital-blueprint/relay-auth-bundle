@@ -10,7 +10,7 @@ use Dbp\Relay\CoreBundle\Authorization\AuthorizationDataProviderInterface;
 
 class AuthorizationDataProvider implements AuthorizationDataProviderInterface
 {
-    /** @var string[] */
+    /** @var array[] */
     private $attributeToScopeMap;
 
     /** @var OIDCUserSessionProviderInterface */
@@ -36,8 +36,15 @@ class AuthorizationDataProvider implements AuthorizationDataProviderInterface
     {
         $userScopes = $this->userSessionProvider->getScopes();
         $userAttributes = [];
-        foreach ($this->attributeToScopeMap as $attribute => $scope) {
-            $userAttributes[$attribute] = in_array($scope, $userScopes, true);
+        foreach ($this->attributeToScopeMap as $attribute => $scopes) {
+            $userAttribute = false;
+            foreach ($scopes as $scope) {
+                if (in_array($scope, $userScopes, true)) {
+                    $userAttribute = true;
+                    break;
+                }
+            }
+            $userAttributes[$attribute] = $userAttribute;
         }
 
         return $userAttributes;
@@ -46,7 +53,11 @@ class AuthorizationDataProvider implements AuthorizationDataProviderInterface
     private function loadAttributeToScopeMapFromConfig(array $attributes)
     {
         foreach ($attributes as $attribute) {
-            $this->attributeToScopeMap[$attribute[Configuration::NAME_ATTRIBUTE]] = $attribute[Configuration::SCOPE_ATTRIBUTE];
+            $scopes = $attribute[Configuration::SCOPES_ATTRIBUTE] ?? [];
+            if (($scopeDeprecated = $attribute[Configuration::SCOPE_ATTRIBUTE] ?? null) !== null) {
+                $scopes[] = $scopeDeprecated;
+            }
+            $this->attributeToScopeMap[$attribute[Configuration::NAME_ATTRIBUTE]] = $scopes;
         }
     }
 }
