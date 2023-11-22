@@ -79,7 +79,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode(self::NAME_ATTRIBUTE)->end()
                             ->scalarNode(self::SCOPE_ATTRIBUTE)
-                               ->setDeprecated('dbp/relay-auth-bundle', '0.1.121', 'Use \'scopes\' instead')
+                               ->setDeprecated('dbp/relay-auth-bundle', '0.1.21', 'Use \'scopes\' instead')
                             ->end()
                             ->arrayNode(self::SCOPES_ATTRIBUTE)
                                ->info('If the user\'s token contains any of the listed scopes, the user is granted the respective authorization attribute, i.e. its value evaluates to \'true\' if requested')
