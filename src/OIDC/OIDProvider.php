@@ -44,8 +44,6 @@ class OIDProvider implements LoggerAwareInterface
 
     /**
      * Replace the guzzle client handler for testing.
-     *
-     * @param object $handler
      */
     public function setClientHandler(?object $handler)
     {
