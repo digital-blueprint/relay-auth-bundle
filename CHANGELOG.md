@@ -1,3 +1,7 @@
+# v0.1.22
+
+* Drop support for PHP 7.3
+
 # v0.1.20
 
 * Add some more unit tests
