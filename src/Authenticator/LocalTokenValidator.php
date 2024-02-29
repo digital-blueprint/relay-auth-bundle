@@ -18,6 +18,7 @@ use Jose\Component\Signature\JWSTokenSupport;
 use Jose\Component\Signature\JWSVerifier;
 use Jose\Component\Signature\Serializer\CompactSerializer;
 use Jose\Component\Signature\Serializer\JWSSerializerManager;
+use Symfony\Component\Clock\NativeClock;
 
 class LocalTokenValidator extends TokenValidatorBase
 {
@@ -85,6 +86,8 @@ class LocalTokenValidator extends TokenValidatorBase
             $headerCheckerManager
         );
 
+        $clock = new NativeClock();
+
         try {
             $jws = $jwsLoader->loadAndVerifyWithKeySet($accessToken, $keySet, $signature);
             $jwt = json_decode($jws->getPayload(), true, 512, JSON_THROW_ON_ERROR);
@@ -94,9 +97,9 @@ class LocalTokenValidator extends TokenValidatorBase
             // * jti: Nothing we know beforehand
             // * aud: The audience needs to be checked afterwards with checkAudience()
             $claimCheckerManager = new ClaimCheckerManager([
-                new Checker\IssuedAtChecker($this->leewaySeconds),
-                new Checker\NotBeforeChecker($this->leewaySeconds),
-                new Checker\ExpirationTimeChecker($this->leewaySeconds),
+                new Checker\IssuedAtChecker($this->leewaySeconds, clock: $clock),
+                new Checker\NotBeforeChecker($this->leewaySeconds, clock: $clock),
+                new Checker\ExpirationTimeChecker($this->leewaySeconds, clock: $clock),
                 new Checker\IssuerChecker([$issuer]),
             ]);
             $claimCheckerManager->check($jwt);
