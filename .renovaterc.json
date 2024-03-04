@@ -16,24 +16,16 @@
       "allowedVersions": "<6"
     },
     {
-      "matchPackagePrefixes": ["web-token/"],
-      "allowedVersions": "<3"
-    },
-    {
-      "matchPackageNames": ["friendsofphp/php-cs-fixer"],
-      "allowedVersions": "<3.5"
-    },
-    {
       "matchPackageNames": ["api-platform/core"],
       "allowedVersions": "<3"
     },
     {
-      "matchPackageNames": ["vimeo/psalm"],
-      "allowedVersions": "<5"
-    },
-    {
       "matchPackageNames": ["phpunit/phpunit"],
       "allowedVersions": "<10"
+    },
+    {
+      "matchPackageNames": ["symfony/cache-contracts"],
+      "allowedVersions": "<3"
     }
   ],
   "js": {
