@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class DbpRelayAuthExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
-    public function loadInternal(array $mergedConfig, ContainerBuilder $container)
+    public function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader(
             $container,
@@ -33,7 +33,7 @@ class DbpRelayAuthExtension extends ConfigurableExtension implements PrependExte
         $definition->addMethodCall('setConfig', [$mergedConfig]);
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $config = $container->getExtensionConfig($this->getAlias())[0];
         $this->extendArrayParameter($container, 'dbp_api.twig_globals', [

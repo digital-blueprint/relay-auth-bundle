@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
 class BearerAuthenticator extends AbstractAuthenticator implements LoggerAwareInterface
@@ -49,7 +49,7 @@ class BearerAuthenticator extends AbstractAuthenticator implements LoggerAwareIn
         return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_FORBIDDEN);
     }
 
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request): Passport
     {
         $auth = $request->headers->get('Authorization', '');
         if ($auth === '') {

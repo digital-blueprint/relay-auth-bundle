@@ -49,7 +49,7 @@ class BearerUser implements UserInterface
         return $this->identifier ?? '';
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 }

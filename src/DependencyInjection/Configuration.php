@@ -39,7 +39,6 @@ class Configuration implements ConfigurationInterface
                 // Remote validation
                 ->booleanNode('remote_validation')
                     ->info("If remote validation should be used. If set to false the token signature will\nbe only checked locally and not send to the keycloak server")
-                    ->example(false)
                     ->defaultFalse()
                 ->end()
                 ->scalarNode('remote_validation_id')
