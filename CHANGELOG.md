@@ -1,3 +1,9 @@
+# v0.1.25
+
+* dev: replace abandoned composer-git-hooks with captainhook.
+  Run `vendor/bin/captainhook install -f` to replace the old hooks with the new ones
+  on an existing checkout.
+
 # v0.1.24
 
 * Port from web-token/jwt-core 2.0 to web-token/jwt-library 3.3
