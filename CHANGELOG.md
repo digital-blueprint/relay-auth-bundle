@@ -1,3 +1,7 @@
+# v0.1.27
+
+* Support symfony/cache-contracts v3
+
 # v0.1.26
 
 * Add support for Symfony 6
