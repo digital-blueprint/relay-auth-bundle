@@ -9,7 +9,7 @@
         "ext-gmp": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "dbp/relay-core-bundle": "^0.1.148",
+        "dbp/relay-core-bundle": "dev-ap3",
         "guzzlehttp/guzzle": "^7.0",
         "kevinrob/guzzle-cache-middleware": "^3.3 || ^4.0 || ^5.0",
         "psr/log": "^1.1.4 || ^2.0 || ^3.0",
