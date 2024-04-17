@@ -1,3 +1,7 @@
+# v0.1.28
+
+* user-roles-cache: properly escape the cache key to avoid Symfony erroring out on special keys
+
 # v0.1.27
 
 * Support symfony/cache-contracts v3
