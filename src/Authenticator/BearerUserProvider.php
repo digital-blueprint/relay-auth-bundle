@@ -99,7 +99,7 @@ class BearerUserProvider implements BearerUserProviderInterface, LoggerAwareInte
      */
     private function getUserRoles(?string $userIdentifier, array $scopes): array
     {
-        $cacheKey = json_encode([$this->userSession->getSessionCacheKey(), $userIdentifier, $scopes], JSON_THROW_ON_ERROR);
+        $cacheKey = Tools::escapeCacheKey(json_encode([$this->userSession->getSessionCacheKey(), $userIdentifier, $scopes], JSON_THROW_ON_ERROR));
 
         return $this->cachePool->get($cacheKey, function (ItemInterface $item) use ($scopes, $userIdentifier): array {
             $item->expiresAfter($this->userSession->getSessionTTL());
