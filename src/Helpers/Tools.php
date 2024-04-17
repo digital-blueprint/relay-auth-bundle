@@ -25,4 +25,14 @@ class Tools
     {
         return preg_split('/\s+/', $jwt['scope'] ?? '', -1, PREG_SPLIT_NO_EMPTY);
     }
+
+    /**
+     * Escape a cache key string to be valid as a Symfony cache key.
+     */
+    public static function escapeCacheKey(string $input): string
+    {
+        // Always append a '.' since empty strings are also not allowed.
+        // For what isn't allowed see ItemInterface::RESERVED_CHARACTERS
+        return rawurlencode($input.'.');
+    }
 }
