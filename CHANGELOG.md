@@ -1,3 +1,7 @@
+# Unreleased
+
+* Port to PHPUnit 10
+
 # v0.1.28
 
 * user-roles-cache: properly escape the cache key to avoid Symfony erroring out on special keys
