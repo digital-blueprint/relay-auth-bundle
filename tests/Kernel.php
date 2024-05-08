@@ -44,6 +44,7 @@ class Kernel extends BaseKernel
         $c->loadFromExtension('framework', [
             'test' => true,
             'secret' => '',
+            'annotations' => false,
         ]);
     }
 }
