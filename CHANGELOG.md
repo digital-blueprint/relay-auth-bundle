@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.29
 
 * Port to PHPUnit 10
 
