@@ -6801,16 +6801,16 @@
         },
         {
             "name": "captainhook/captainhook",
-            "version": "5.23.0",
+            "version": "5.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhookphp/captainhook.git",
-                "reference": "08d90e4d98db123ab58826be8e891d7d36c14f2a"
+                "reference": "dcadeb2961ab851fa4c70291abd02d1f43b1bc45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/08d90e4d98db123ab58826be8e891d7d36c14f2a",
-                "reference": "08d90e4d98db123ab58826be8e891d7d36c14f2a",
+                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/dcadeb2961ab851fa4c70291abd02d1f43b1bc45",
+                "reference": "dcadeb2961ab851fa4c70291abd02d1f43b1bc45",
                 "shasum": ""
             },
             "require": {
@@ -6873,7 +6873,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhookphp/captainhook/tree/5.23.0"
+                "source": "https://github.com/captainhookphp/captainhook/tree/5.23.1"
             },
             "funding": [
                 {
@@ -6881,7 +6881,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-12T10:39:21+00:00"
+            "time": "2024-06-18T22:19:22+00:00"
         },
         {
             "name": "captainhook/secrets",
@@ -8193,16 +8193,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.4",
+            "version": "1.11.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82"
+                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9100a76ce8015b9aa7125b9171ae3a76887b6c82",
-                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/490f0ae1c92b082f154681d7849aee776a7c1443",
+                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443",
                 "shasum": ""
             },
             "require": {
@@ -8247,7 +8247,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-06T12:19:22+00:00"
+            "time": "2024-06-17T15:10:54+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
