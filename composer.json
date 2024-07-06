@@ -24,7 +24,7 @@
         "symfony/security-core": "^5.4 || ^6.4",
         "symfony/security-http": "^5.4 || ^6.4",
         "symfony/yaml": "^5.4 || ^6.4",
-        "web-token/jwt-library": "^3.3"
+        "web-token/jwt-library": "^4.0"
     },
     "require-dev": {
         "captainhook/captainhook": "^5.21.2",
