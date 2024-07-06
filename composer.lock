@@ -256,16 +256,16 @@
         },
         {
             "name": "dbp/relay-core-bundle",
-            "version": "v0.1.168",
+            "version": "v0.1.170",
             "source": {
                 "type": "git",
                 "url": "https://github.com/digital-blueprint/relay-core-bundle.git",
-                "reference": "ee0af73ddf8bca28ff93d201412d405de5cebf6e"
+                "reference": "5998191b7ac5ef04c0ecdd1783f62262112f6a62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digital-blueprint/relay-core-bundle/zipball/ee0af73ddf8bca28ff93d201412d405de5cebf6e",
-                "reference": "ee0af73ddf8bca28ff93d201412d405de5cebf6e",
+                "url": "https://api.github.com/repos/digital-blueprint/relay-core-bundle/zipball/5998191b7ac5ef04c0ecdd1783f62262112f6a62",
+                "reference": "5998191b7ac5ef04c0ecdd1783f62262112f6a62",
                 "shasum": ""
             },
             "require": {
@@ -348,9 +348,9 @@
             "description": "The core bundle of the Relay API gateway",
             "support": {
                 "issues": "https://github.com/digital-blueprint/relay-core-bundle/issues",
-                "source": "https://github.com/digital-blueprint/relay-core-bundle/tree/v0.1.168"
+                "source": "https://github.com/digital-blueprint/relay-core-bundle/tree/v0.1.170"
             },
-            "time": "2024-06-25T11:42:22+00:00"
+            "time": "2024-07-04T10:25:13+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -6376,16 +6376,16 @@
         },
         {
             "name": "web-token/jwt-library",
-            "version": "3.4.4",
+            "version": "3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-library.git",
-                "reference": "48cb17a2c3622ffab69f0d48753e132e1cf23ba6"
+                "reference": "1a25c8ced3e2b3c31d32dcfad215cbd8cb812f28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-token/jwt-library/zipball/48cb17a2c3622ffab69f0d48753e132e1cf23ba6",
-                "reference": "48cb17a2c3622ffab69f0d48753e132e1cf23ba6",
+                "url": "https://api.github.com/repos/web-token/jwt-library/zipball/1a25c8ced3e2b3c31d32dcfad215cbd8cb812f28",
+                "reference": "1a25c8ced3e2b3c31d32dcfad215cbd8cb812f28",
                 "shasum": ""
             },
             "require": {
@@ -6458,7 +6458,7 @@
             ],
             "support": {
                 "issues": "https://github.com/web-token/jwt-library/issues",
-                "source": "https://github.com/web-token/jwt-library/tree/3.4.4"
+                "source": "https://github.com/web-token/jwt-library/tree/3.4.6"
             },
             "funding": [
                 {
@@ -6470,7 +6470,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-06-24T16:31:57+00:00"
+            "time": "2024-07-02T16:35:11+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -8142,16 +8142,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.5",
+            "version": "1.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443"
+                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/490f0ae1c92b082f154681d7849aee776a7c1443",
-                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
+                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
                 "shasum": ""
             },
             "require": {
@@ -8196,7 +8196,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-17T15:10:54+00:00"
+            "time": "2024-07-01T15:33:06+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
