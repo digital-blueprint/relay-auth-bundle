@@ -10,6 +10,7 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "constraintsFiltering": "strict",
   "packageRules": [
   ],
   "js": {
