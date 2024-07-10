@@ -10,19 +10,17 @@ use Dbp\Relay\CoreBundle\Authorization\AuthorizationDataProviderInterface;
 
 class AuthorizationDataProvider implements AuthorizationDataProviderInterface
 {
-    /** @var array[] */
-    private $attributeToScopeMap;
+    /** @var string[][] */
+    private array $attributeToScopeMap = [];
 
-    /** @var OIDCUserSessionProviderInterface */
-    private $userSessionProvider;
+    private OIDCUserSessionProviderInterface $userSessionProvider;
 
     public function __construct(OIDCUserSessionProviderInterface $userSessionProvider)
     {
-        $this->attributeToScopeMap = [];
         $this->userSessionProvider = $userSessionProvider;
     }
 
-    public function setConfig(array $config)
+    public function setConfig(array $config): void
     {
         $this->loadAttributeToScopeMapFromConfig($config[Configuration::ATTRIBUTES_ATTRIBUTE]);
     }
@@ -50,7 +48,7 @@ class AuthorizationDataProvider implements AuthorizationDataProviderInterface
         return $userAttributes;
     }
 
-    private function loadAttributeToScopeMapFromConfig(array $attributes)
+    private function loadAttributeToScopeMapFromConfig(array $attributes): void
     {
         foreach ($attributes as $attribute) {
             $scopes = $attribute[Configuration::SCOPES_ATTRIBUTE] ?? [];

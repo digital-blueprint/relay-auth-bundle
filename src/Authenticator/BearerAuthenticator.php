@@ -21,12 +21,8 @@ class BearerAuthenticator extends AbstractAuthenticator implements LoggerAwareIn
 {
     use LoggerAwareTrait;
 
-    private $userProvider;
-
-    /**
-     * @var OIDCUserSessionProviderInterface
-     */
-    private $userSession;
+    private BearerUserProviderInterface $userProvider;
+    private OIDCUserSessionProviderInterface $userSession;
 
     public function __construct(OIDCUserSessionProviderInterface $userSession, BearerUserProviderInterface $userProvider)
     {
@@ -46,7 +42,7 @@ class BearerAuthenticator extends AbstractAuthenticator implements LoggerAwareIn
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_FORBIDDEN);
+        return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_UNAUTHORIZED);
     }
 
     public function authenticate(Request $request): Passport

@@ -70,7 +70,7 @@ class BearerAuthenticatorTest extends ApiTestCase
         $provider = new DummyUserProvider($user, 'bar');
         $auth = new BearerAuthenticator(new DummyUserSessionProvider(), $provider);
         $response = $auth->onAuthenticationFailure(new Request(), new AuthenticationException());
-        $this->assertSame(403, $response->getStatusCode());
+        $this->assertSame(401, $response->getStatusCode());
         $this->assertNotNull(json_decode($response->getContent()));
     }
 }
