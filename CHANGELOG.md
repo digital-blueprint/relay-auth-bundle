@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.39
+
+* Return 401 instead of 403 on authentication failure
+
 ## v0.1.29
 
 * Port to PHPUnit 10
