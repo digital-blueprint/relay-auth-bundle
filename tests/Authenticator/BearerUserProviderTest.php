@@ -8,7 +8,7 @@ use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
 use Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider;
 use Dbp\Relay\AuthBundle\Service\DefaultUserRoles;
-use Dbp\Relay\AuthBundle\Tests\DummyUserSessionProvider;
+use Dbp\Relay\AuthBundle\Tests\UserSession\DummyUserSessionProvider;
 use Psr\Log\NullLogger;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 

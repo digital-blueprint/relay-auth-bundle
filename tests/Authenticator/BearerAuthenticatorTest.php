@@ -8,7 +8,7 @@ use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Dbp\Relay\AuthBundle\Authenticator\BearerAuthenticator;
 use Dbp\Relay\AuthBundle\Authenticator\BearerUser;
 use Dbp\Relay\AuthBundle\Tests\DummyUserProvider;
-use Dbp\Relay\AuthBundle\Tests\DummyUserSessionProvider;
+use Dbp\Relay\AuthBundle\Tests\UserSession\DummyUserSessionProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\NullToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;

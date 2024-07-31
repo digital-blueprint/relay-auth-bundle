@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Service;
+namespace Dbp\Relay\AuthBundle\UserSession;
 
-use Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface;
 use Dbp\Relay\AuthBundle\Helpers\Tools;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dbp\Relay\AuthBundle\Tests;
 
 use Dbp\Relay\AuthBundle\Service\AuthorizationDataProvider;
+use Dbp\Relay\AuthBundle\Tests\UserSession\DummyUserSessionProvider;
 use PHPUnit\Framework\TestCase;
 
 class AuthorizationDataProviderTest extends TestCase

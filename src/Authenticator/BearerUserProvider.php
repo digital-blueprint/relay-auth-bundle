@@ -10,6 +10,7 @@ use Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider;
 use Dbp\Relay\AuthBundle\TokenValidator\LocalTokenValidator;
 use Dbp\Relay\AuthBundle\TokenValidator\RemoteTokenValidator;
 use Dbp\Relay\AuthBundle\TokenValidator\TokenValidationException;
+use Dbp\Relay\AuthBundle\UserSession\OIDCUserSessionProviderInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;

@@ -9,12 +9,12 @@ services:
     calls:
       - setCache: [ '@dbp.relay.auth.cache.user_roles' ]
 
-  Dbp\Relay\AuthBundle\Service\OIDCUserSessionProvider:
+  Dbp\Relay\AuthBundle\UserSession\OIDCUserSessionProvider:
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface:
-    '@Dbp\Relay\AuthBundle\Service\OIDCUserSessionProvider'
+  Dbp\Relay\AuthBundle\UserSession\OIDCUserSessionProviderInterface:
+    '@Dbp\Relay\AuthBundle\UserSession\OIDCUserSessionProvider'
 
   Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider:
     autowire: true

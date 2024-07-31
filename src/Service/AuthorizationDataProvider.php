@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Service;
 
-use Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface;
 use Dbp\Relay\AuthBundle\DependencyInjection\Configuration;
+use Dbp\Relay\AuthBundle\UserSession\OIDCUserSessionProviderInterface;
 use Dbp\Relay\CoreBundle\Authorization\AuthorizationDataProviderInterface;
 
 class AuthorizationDataProvider implements AuthorizationDataProviderInterface
