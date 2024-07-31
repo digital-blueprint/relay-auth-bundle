@@ -6,9 +6,9 @@ namespace Dbp\Relay\AuthBundle\Service;
 
 use Dbp\Relay\AuthBundle\DependencyInjection\Configuration;
 use Dbp\Relay\AuthBundle\UserSession\OIDCUserSessionProviderInterface;
-use Dbp\Relay\CoreBundle\Authorization\AuthorizationDataProviderInterface;
+use Dbp\Relay\CoreBundle\User\UserAttributeProviderInterface;
 
-class AuthorizationDataProvider implements AuthorizationDataProviderInterface
+class AuthorizationDataProvider implements UserAttributeProviderInterface
 {
     /** @var string[][] */
     private array $attributeToScopeMap = [];
