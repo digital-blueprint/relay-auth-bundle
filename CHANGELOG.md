@@ -1,6 +1,10 @@
 # Changelog
 
-## v0.1.39
+## v0.1.31
+
+* Minor cleanup of the codebase
+
+## v0.1.30
 
 * Return 401 instead of 403 on authentication failure
 
