@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Tests\Keycloak;
+namespace Dbp\Relay\AuthBundle\Tests\TokenValidator;
 
-use Dbp\Relay\AuthBundle\Authenticator\RemoteTokenValidator;
-use Dbp\Relay\AuthBundle\Authenticator\TokenValidationException;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Dbp\Relay\AuthBundle\TokenValidator\RemoteTokenValidator;
+use Dbp\Relay\AuthBundle\TokenValidator\TokenValidationException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Authenticator;
+namespace Dbp\Relay\AuthBundle\TokenValidator;
 
 use Dbp\Relay\AuthBundle\OIDC\OIDError;
 use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
