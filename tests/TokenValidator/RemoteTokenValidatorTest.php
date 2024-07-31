@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\Tests\TokenValidator;
 
-use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider;
 use Dbp\Relay\AuthBundle\TokenValidator\RemoteTokenValidator;
 use Dbp\Relay\AuthBundle\TokenValidator\TokenValidationException;
 use GuzzleHttp\Handler\MockHandler;

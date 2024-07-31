@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\Tests\OIDC;
+namespace Dbp\Relay\AuthBundle\Tests\OIDCProvider;
 
-use Dbp\Relay\AuthBundle\OIDC\OIDProviderConfig;
+use Dbp\Relay\AuthBundle\OIDCProvider\OIDProviderConfig;
 use PHPUnit\Framework\TestCase;
 
 class OIDProviderConfigTest extends TestCase

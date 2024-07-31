@@ -6,7 +6,7 @@ namespace Dbp\Relay\AuthBundle\Authenticator;
 
 use Dbp\Relay\AuthBundle\API\UserRolesInterface;
 use Dbp\Relay\AuthBundle\Helpers\Tools;
-use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider;
 use Dbp\Relay\AuthBundle\TokenValidator\LocalTokenValidator;
 use Dbp\Relay\AuthBundle\TokenValidator\RemoteTokenValidator;
 use Dbp\Relay\AuthBundle\TokenValidator\TokenValidationException;

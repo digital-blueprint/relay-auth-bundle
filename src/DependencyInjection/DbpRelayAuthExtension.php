@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Dbp\Relay\AuthBundle\DependencyInjection;
 
 use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
-use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider;
 use Dbp\Relay\AuthBundle\Service\AuthorizationDataProvider;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

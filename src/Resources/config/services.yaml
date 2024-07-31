@@ -16,7 +16,7 @@ services:
   Dbp\Relay\AuthBundle\Authenticator\OIDCUserSessionProviderInterface:
     '@Dbp\Relay\AuthBundle\Service\OIDCUserSessionProvider'
 
-  Dbp\Relay\AuthBundle\OIDC\OIDProvider:
+  Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider:
     autowire: true
     autoconfigure: true
     calls:

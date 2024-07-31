@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\OIDC;
+namespace Dbp\Relay\AuthBundle\OIDCProvider;
 
 use Dbp\Relay\AuthBundle\Helpers\Tools;
 use GuzzleHttp\Client;

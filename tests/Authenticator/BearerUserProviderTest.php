@@ -6,7 +6,7 @@ namespace Dbp\Relay\AuthBundle\Tests\Authenticator;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Dbp\Relay\AuthBundle\Authenticator\BearerUserProvider;
-use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider;
 use Dbp\Relay\AuthBundle\Service\DefaultUserRoles;
 use Dbp\Relay\AuthBundle\Tests\DummyUserSessionProvider;
 use Psr\Log\NullLogger;

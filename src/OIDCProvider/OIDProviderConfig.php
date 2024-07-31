@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\AuthBundle\OIDC;
+namespace Dbp\Relay\AuthBundle\OIDCProvider;
 
 /**
  * discover: https://openid.net/specs/openid-connect-discovery-1_0.html

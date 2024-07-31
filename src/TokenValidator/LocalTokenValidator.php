@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\AuthBundle\TokenValidator;
 
-use Dbp\Relay\AuthBundle\OIDC\OIDError;
-use Dbp\Relay\AuthBundle\OIDC\OIDProvider;
+use Dbp\Relay\AuthBundle\OIDCProvider\OIDError;
+use Dbp\Relay\AuthBundle\OIDCProvider\OIDProvider;
 use Jose\Component\Checker;
 use Jose\Component\Checker\AlgorithmChecker;
 use Jose\Component\Checker\ClaimCheckerManager;
